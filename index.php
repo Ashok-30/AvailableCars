@@ -79,27 +79,27 @@ if (mysqli_num_rows($result) > 0) {
                     </div>
                     <ul class="card-list">
                       <li class="card-list-item">
-                        <ion-icon name="flash-outline"></ion-icon>
+                        
                         <span class="card-item-text">TRANSMISSION</span>
                       </li>
                       <li class="card-list-item">
-                        <ion-icon name="flash-outline"></ion-icon>
+                        
                         <span class="card-item-text">'.$row['transmission'].'</span>
                       </li>
                       <li class="card-list-item">
-                        <ion-icon name="flash-outline"></ion-icon>
+                       
                         <span class="card-item-text">ADDRESS</span>
                       </li>
                       <li class="card-list-item">
-                        <ion-icon name="speedometer-outline"></ion-icon>
+                        
                         <span class="card-item-text">'.$row['address'].'</span>
                       </li>
                       <li class="card-list-item">
-                        <ion-icon name="flash-outline"></ion-icon>
+                       
                         <span class="card-item-text">CAR NUMBER</span>
                       </li>
                       <li class="card-list-item">
-                        <ion-icon name="hardware-chip-outline"></ion-icon>
+                        
                         <span class="card-item-text">'.$row['car_number'].'</span>
                       </li>
                     </ul>
@@ -107,7 +107,7 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn rent-btn" data-add-id="'.$row['add_id'].'">Rent now</button>
+                      <button class="btn rent-btn" data-add-id="'.$row['add_id'].'">Book</button>
                       </div>
                   </div>
                 </div>

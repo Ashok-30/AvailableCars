@@ -7,6 +7,6 @@
   <a href="listings.php">Listings</a>
   <a href="#contact">Financials</a>
   <a href="#contact">Inbox</a>
-  <a href="#contact">Profile</a>
+  <a href="profile.php">Profile</a>
   <a href="#contact">Help</a>
 </div>
