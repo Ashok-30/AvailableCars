@@ -30,7 +30,13 @@ if (isset($_POST['login'])) {
         $_SESSION['logged_in'] = true;
         $_SESSION['role'] = $role;
         $_SESSION['first_name'] = $row['first_name'];
-        $_SESSION['id'] = $row['id']; // Assuming role is returned from the form
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['last_name'] = $row['last_name'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phone'] = $row['phone'];
+        $_SESSION['address'] = $row['address'];
+        $_SESSION['pincode'] = $row['pincode'];
+        $_SESSION['password'] = $row['password'];
 
         if ($role === 'Car Owner') {
             header('Location: carownerdashboard.php');
