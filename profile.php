@@ -23,8 +23,10 @@ $password=$_SESSION['password'];
                     <img src="" alt="Add image" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>John Doe</h4>
+                      <input type="file" id="fileInput" style="display: none;" accept="image/*">
+                        
                      
-                      <button class="btn btn-primary">Add Photo</button>
+                      <button type="button" id="uploadBtn"class="btn btn-primary">Add Photo</button>
                       
                     </div>
                   </div>
@@ -154,5 +156,18 @@ $(document).ready(function() {
         // Submit the form to update profile
         $("#profileForm").submit();
     });
+});
+document.getElementById("uploadBtn").addEventListener("click", function() {
+    document.getElementById("fileInput").click();
+});
+
+document.getElementById("fileInput").addEventListener("change", function() {
+    // Handle file selection here
+    var file = this.files[0];
+    if (file) {
+        // You can use this file object to preview or upload the image
+        console.log("Selected file:", file);
+        // You can submit the form or perform any other necessary action here
+    }
 });
 </script>
