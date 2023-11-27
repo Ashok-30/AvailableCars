@@ -821,3 +821,7 @@ input { width: 100%; }
   margin-top: 5%;
   margin-left: 16%;
 }
+.toggle-icon {
+  font-size: 85%;
+  color: #916dd9 /* Adjust the font size of eye icon */
+}

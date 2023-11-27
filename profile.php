@@ -10,9 +10,11 @@ $pincode=$_SESSION['pincode'];
 $email=$_SESSION['email'];
 $phone=$_SESSION['phone'];
 $password=$_SESSION['password'];
+
 ?>
 <div class="container">
     <div class="profile">
+    <form id="profileForm" method="POST" action="update_profile.php">
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -34,10 +36,23 @@ $password=$_SESSION['password'];
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
+                      <h6 class="mb-0">First Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <?php echo $first_name . ' ' . $last_name; ?>
+                    
+                    <input type="text" id="firstName" name="first_name" value="<?php echo $first_name; ?>" readonly>
+
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Last Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    
+                    <input type="text" id="lastName" name="last_name" value="<?php echo $last_name; ?>" readonly>
+
                     </div>
                   </div>
                   <hr>
@@ -46,7 +61,8 @@ $password=$_SESSION['password'];
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <?php echo $email; ?>
+                    <input type="text" id="email" name="email" value="<?php echo $email; ?>" readonly>
+
                     </div>
                   </div>
                   <hr>
@@ -55,7 +71,8 @@ $password=$_SESSION['password'];
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <?php echo $phone; ?>
+                    <input type="text" id="phone" name="phone" value="<?php echo $phone; ?>" readonly>
+
                     </div>
                   </div>
                   <hr>
@@ -65,7 +82,8 @@ $password=$_SESSION['password'];
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <?php echo $address; ?>
+                    <input type="text" id="address" name="address" value="<?php echo $address; ?>" readonly>
+
                     </div>
                   </div>
                   <hr>
@@ -74,27 +92,67 @@ $password=$_SESSION['password'];
                       <h6 class="mb-0">Pincode</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <?php echo $pincode; ?>
+                    <input type="text" id="pincode" name="pincode" value="<?php echo $pincode; ?>" readonly>
+
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Password</h6>
+                        <h6 class="mb-0">Password</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                    <?php echo $password; ?>
+                    <div class="col-sm-3 text-secondary">
+                        <input type="password" id="passwordField" name="password" value="<?php echo $password; ?>" disabled >
+                    </div>
+                    <div class=" col-sm-3">
+                        <button type="button" id="togglePassword">
+                        <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
+                        </button>
                     </div>
                   </div>
-                  <hr>
+<hr>
+
                   <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn btn-info">Edit</a>
-                    </div>
+                  <div class="col-sm-12">
+                    <button type="button" id="editProfile" class="btn btn-info">Edit</button>
+                    <button type="submit" id="saveProfile" class="btn btn-success" style="display: none;">Save</button>
+                </div>
                   </div>
+</form>
                 </div>
               </div>
             </div>
           </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $("#togglePassword").click(function() {
+        var passwordField = $("#passwordField");
+        var toggleIcon = $("#toggleIcon");
+        
+        if (passwordField.attr("type") === "password") {
+            passwordField.attr("type", "text");
+            toggleIcon.removeClass("fa-eye");
+            toggleIcon.addClass("fa-eye-slash");
+        } else {
+            passwordField.attr("type", "password");
+            toggleIcon.removeClass("fa-eye-slash");
+            toggleIcon.addClass("fa-eye");
+        }
+    });
+
+    $("#editProfile").click(function() {
+        // Enable all input fields for editing
+        $("#profileForm input").prop("readonly", false);
+        $("#passwordField").prop("disabled", false); 
+        $("#saveProfile").show();
+        $(this).hide();
+    });
+
+    $("#saveProfile").click(function() {
+        // Submit the form to update profile
+        $("#profileForm").submit();
+    });
+});
+</script>

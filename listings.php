@@ -87,7 +87,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 ?>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 $(document).ready(function() {
     $('.rent-btn').on('click', function() {
