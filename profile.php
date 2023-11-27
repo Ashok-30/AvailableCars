@@ -22,7 +22,7 @@ $password=$_SESSION['password'];
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="" alt="Add image" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>John Doe</h4>
+                      
                       <input type="file" id="fileInput" style="display: none;" accept="image/*">
                         
                      
@@ -170,4 +170,6 @@ document.getElementById("fileInput").addEventListener("change", function() {
         // You can submit the form or perform any other necessary action here
     }
 });
+
+
 </script>

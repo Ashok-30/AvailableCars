@@ -107,7 +107,10 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn rent-btn" data-add-id="'.$row['add_id'].'">Book</button>
+                      <button class="btn rent-btn login-btn" data-add-id="'.$row['add_id'].'">Book</button>
+                      
+                      
+
                       </div>
                   </div>
                 </div>
@@ -439,26 +442,10 @@ if (mysqli_num_rows($result) > 0) {
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('.rent-btn').on('click', function() {
-        var addId = $(this).data('add-id');
-        
-        $.ajax({
-            type: 'POST',
-            url: 'rent_car.php', // Replace with the PHP file handling the update
-            data: { add_id: addId },
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    console.log('Status updated successfully');
-                    location.reload(); // Reload the page after successful update
-                } else {
-                    console.log('Failed to update status');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+   // redirects to login page
+    $('.login-btn').on('click', function() {
+        window.location.href = 'login.php';
     });
 });
+
 </script>
