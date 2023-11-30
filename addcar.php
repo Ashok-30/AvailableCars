@@ -105,7 +105,7 @@ if (isset($_POST["submit"])) {
 
         if (mysqli_query($conn, $sql)) {
             // Success - Redirect to another page
-            header('Location: carownerdashboard.php');
+            header('Location: listings.php');
             exit();
         } else {
             // Query error

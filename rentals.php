@@ -13,7 +13,7 @@ if (mysqli_num_rows($result) > 0) {
     echo '<section class="section listed-car rentals" id="listed-car">
             <div class="container">
               <div class="title-wrapper">
-                <h2 class="h2 section-title">ALL CARS CURRENTLY IN RENT</h2>
+                <h2 class="h2 section-title">CARS CURRENTLY RENTED</h2>
               </div>
               <ul class="listed-car-list">';
     
@@ -69,8 +69,9 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn">Remove from rent</button>
-                    </div>
+                      <button class="btn removefromrent-btn" data-add-id="'.$row['add_id'].'">remove from rent</button>
+                      
+                      </div>
                   </div>
                 </div>
               </li>';
@@ -86,3 +87,28 @@ if (mysqli_num_rows($result) > 0) {
         </form>';
 }
 ?>
+<script>
+$(document).ready(function() {
+    $('.removefromrent-btn').on('click', function() {
+        var addId = $(this).data('add-id');
+        
+        $.ajax({
+            type: 'POST',
+            url: 'rent_remove.php', 
+            data: { add_id: addId },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    console.log('Status updated successfully');
+                    location.reload(); // Reload the page after successful update
+                } else {
+                    console.log('Failed to update status');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+</script>

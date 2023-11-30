@@ -81,12 +81,41 @@ if (isset($_POST['login'])) {
     <div class="d-grid">
       <button type="submit" name="login" class="btn">Login</button>
     </div>
-    <div class="text-white"><?php echo htmlspecialchars($error_msg ?? ''); ?></div>
+    
   </form>
 <div class="mb-3" style="padding-left:40%; color: white;">
     Don't have an account? <a style="color: white;"href="signup.php">Sign-up</a>
   </div>
 </div>
+
+<div class="position-fixed top-50 start-50 translate-middle" style="z-index: 11" id="toastContainer">
+  <div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Error</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Invalid username or password.
+    </div>
+  </div>
+</div>
+
+<script>
+  <?php if(isset($error_msg) && !empty($error_msg)) { ?>
+    document.addEventListener('DOMContentLoaded', function () {
+      var myToast = new bootstrap.Toast(document.getElementById('toast'));
+      myToast.show();
+
+      // Hide the toast after 3 seconds 
+      setTimeout(function() {
+        myToast.hide();
+        document.getElementById('toastContainer').classList.add('hide'); 
+      }, 3000); // 3000 milliseconds = 3 seconds
+    });
+  <?php } ?>
+</script>
+
+
 </body>
 
  

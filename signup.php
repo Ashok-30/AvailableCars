@@ -150,6 +150,7 @@ if (isset($_POST['submit'])) {
             Already have an account? <a style="color: white;" href="login.php">Login</a>
         </div>
     </div>
+    
     <script>
 function validatePasswords() {
     var password = document.getElementById("password").value;

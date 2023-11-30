@@ -96,7 +96,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'rent_car.php', // Replace with the PHP file handling the update
+            url: 'rent_car.php', 
             data: { add_id: addId },
             dataType: 'json',
             success: function(response) {
