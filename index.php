@@ -29,7 +29,7 @@ include('config/db_connect.php');
             </form>
  
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-6 index-img">
     <img src="img/home.jpg" alt="car" class="img-fluid">
   </div>
 </div>

@@ -22,8 +22,8 @@ if ($result1->num_rows > 0) {
 
 $user_id = $_SESSION['id'];
 $status='0';
-$make = $model = $no_of_seats = $transmission = $address = $price = $car_number = '';
-$errors = array('make' => '', 'model' => '', 'no_of_seats' => '', 'transmission' => '', 'address' => '', 'price' => '', 'car_number' => '');
+$make = $model = $no_of_seats = $transmission = $price = $car_number = '';
+$errors = array('make' => '', 'model' => '', 'no_of_seats' => '', 'transmission' => '', 'price' => '', 'car_number' => '');
 
 // Check if the file was uploaded without errors
 if (isset($_POST["submit"])) {
@@ -74,13 +74,6 @@ if (isset($_POST["submit"])) {
         $transmission = mysqli_real_escape_string($conn, $_POST['transmission']);
     }
 
-    // Validate address
-    if (empty($_POST['address'])) {
-        $errors['address'] = 'Address is required';
-    } else {
-        $address = mysqli_real_escape_string($conn, $_POST['address']);
-    }
-
     // Validate price
     if (empty($_POST['price'])) {
         $errors['price'] = 'Price is required';
@@ -100,12 +93,12 @@ if (isset($_POST["submit"])) {
     } else {
         // All fields are valid, proceed to insert into the database
         echo 'All fields are valid, proceed to insert into the database';
-        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, address, price, car_number, user_id,status, image_name)
-                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$address', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
+        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name)
+                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
 
         if (mysqli_query($conn, $sql)) {
             // Success - Redirect to another page
-            header('Location: listings.php');
+            header('Location: add_address.php');
             exit();
         } else {
             // Query error
@@ -123,12 +116,6 @@ if (isset($_POST["submit"])) {
     }
 }
 }
-
-if (isset($_POST['submit'])) {
-    
-}
-
-
 
 ?>
 <div class="container-add">
@@ -181,9 +168,6 @@ if (isset($_POST['submit'])) {
 </div>
     </div>
     </div>
-    <div class="mb-3">Address for Pick-up
-        <input type="text" class="form-control" name="address" placeholder="Address" aria-label="Address">
-    </div>
     <div class="row">
             <div class="col">Price per day
             <input type="text" class="form-control"name="price" placeholder="Price in &pound;" aria-label="price">
@@ -198,7 +182,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
     <div>
-      <button type="submit" name="submit" value="Upload"class="btn">Add </button>
+      <button type="submit" name="submit" value="Upload"class="btn">NEXT</button>
     </div>
   </form>
  
