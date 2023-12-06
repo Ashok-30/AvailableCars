@@ -88,23 +88,7 @@ $(document).ready(function() {
     $('.rent-btn').on('click', function() {
         var addId = $(this).data('add-id');
         
-        $.ajax({
-            type: 'POST',
-            url: 'rent_car.php', 
-            data: { add_id: addId },
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    console.log('Status updated successfully');
-                    location.reload(); // Reload the page after successful update
-                } else {
-                    console.log('Failed to update status');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
+     window.location.href = 'datepicker.php?add_id=' + addId;
     });
 });
 $(document).ready(function() {

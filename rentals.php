@@ -62,7 +62,7 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn removefromrent-btn" data-add-id="'.$row['add_id'].'">remove from rent</button>
+                      <button class="btn removefromrent-btn" data-add-id="'.$row['add_id'].'">Remove from Rent</button>
                       
                       </div>
                   </div>
