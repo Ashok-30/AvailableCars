@@ -162,8 +162,8 @@ if (isset($_POST["submit"])) {
     <label for="priceDropdown" class="form-label" >Type of Transmission</label>
     <select class="form-select" name="transmission" id="priceDropdown" aria-label="Price">
         <option selected>Select type</option>
-        <option value="manual">Manual</option>
-        <option value="automatic">Automatic</option>
+        <option value="MANUAL">Manual</option>
+        <option value="AUTOMATIC">Automatic</option>
     </select>
 </div>
     </div>

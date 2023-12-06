@@ -48,14 +48,7 @@ if (mysqli_num_rows($result) > 0) {
                         <ion-icon name="flash-outline"></ion-icon>
                         <span class="card-item-text">'.$row['transmission'].'</span>
                       </li>
-                      <li class="card-list-item">
-                        <ion-icon name="flash-outline"></ion-icon>
-                        <span class="card-item-text">ADDRESS</span>
-                      </li>
-                      <li class="card-list-item">
-                        <ion-icon name="speedometer-outline"></ion-icon>
-                        <span class="card-item-text">'.$row['address'].'</span>
-                      </li>
+                   
                       <li class="card-list-item">
                         <ion-icon name="flash-outline"></ion-icon>
                         <span class="card-item-text">CAR NUMBER</span>

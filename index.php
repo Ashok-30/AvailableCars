@@ -86,14 +86,7 @@ if (mysqli_num_rows($result) > 0) {
                         
                         <span class="card-item-text">'.$row['transmission'].'</span>
                       </li>
-                      <li class="card-list-item">
-                       
-                        <span class="card-item-text">ADDRESS</span>
-                      </li>
-                      <li class="card-list-item">
-                        
-                        <span class="card-item-text">'.$row['address'].'</span>
-                      </li>
+                     
                       <li class="card-list-item">
                        
                         <span class="card-item-text">CAR NUMBER</span>

@@ -4,11 +4,12 @@ include 'templates/ownersidebar.php';
 include ('config/db_connect.php');
 session_start();
 $user_id = $_SESSION['id'];
+$postcode = '';
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['address'], $_POST['latitude'], $_POST['longitude'])) {
+    if (isset($_POST['address'], $_POST['latitude'], $_POST['longitude'], $_POST['postcode'])) {
         $sql1 = "SELECT add_id FROM add_car ORDER BY add_id DESC LIMIT 1;";
 $result1 = $conn->query($sql1);
 
@@ -23,9 +24,9 @@ $result1 = $conn->query($sql1);
         $address = $_POST['address'];
         $latitude = $_POST['latitude'];
         $longitude = $_POST['longitude'];
-        
+        $postcode = $_POST['postcode'];
         // Prepare INSERT query
-        $sql = "INSERT INTO address (address, latitude, longitude, user_id, add_id) VALUES ('$address', '$latitude', '$longitude', '$user_id', '$add_id')";
+        $sql = "INSERT INTO address (address, latitude, longitude, user_id, add_id, postcode) VALUES ('$address', '$latitude', '$longitude', '$user_id', '$add_id', '$postcode')";
 
         if (mysqli_query($conn, $sql)) {
             // Success - Redirect to another page
@@ -35,10 +36,9 @@ $result1 = $conn->query($sql1);
             // Query error
             echo 'Query error: ' . mysqli_error($conn);
         }
-    } else {
-        echo 'Address or coordinates not provided.';
     }
-}
+    }
+
 
 $conn->close();
 ?>
@@ -52,8 +52,11 @@ $conn->close();
     <textarea id="address" name="address" rows="3" cols="50"></textarea>
 
     <input type="hidden" id="lat" name="latitude">
-<input type="hidden" id="lng" name="longitude">
+<input type="hidden" id="lng" name="longitude"><br>
+<label for="postcode">Enter Postcode:</label></br>
+    <textarea id="postcode" name="postcode"></textarea>
 <div style="text-align: left;">
+    
     <button class="btn" type="button" onclick="geocodeAddress()">Submit</button>
 </div>
 </form>
@@ -73,7 +76,7 @@ $conn->close();
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=***&libraries=places" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=4&libraries=places" async defer></script>
 <script>
 function geocodeAddress() {
     var geocoder = new google.maps.Geocoder();
