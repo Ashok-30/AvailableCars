@@ -812,6 +812,13 @@ input { width: 100%; }
 /*-----------------------------------*\
   PROFILE
 \*-----------------------------------*/
+.avatar {
+  vertical-align: middle;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+
+}
 .profile{
   margin-top: 5%;
   margin-left: 16%;

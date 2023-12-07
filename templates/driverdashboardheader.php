@@ -37,14 +37,24 @@ session_start();
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link fas fa-envelope"></a>
+    <li class="nav-item">
+            <a href="driverdashboard.php" class="nav-link fa fa-home">Home</a>
           </li>
+      
+    <li class="nav-item">
+            <a href="driverstats.php" class="nav-link fa fa-male">Dashboard</a>
+          </li>
+          
+          
+    <li class="nav-item">
+            <a href="profile.php" class="nav-link fas fa-address-card">Profile</a>
+          </li>
+         
           
           
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle fas fa-user" id="navbarDropdown"
-              data-bs-toggle="dropdown" aria-expanded="false">
+              data-bs-toggle="dropdown" aria-expanded="false">More
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a href="switchtoowner.php" class="dropdown-item brand-style">Switch to Owner</a></li>

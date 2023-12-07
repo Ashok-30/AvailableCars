@@ -2,6 +2,7 @@
 include('templates/ownerdashboardheader.php');
 include('templates/ownersidebar.php');
 include('config/db_connect.php');
+session_start();
 $user_id = $_SESSION['id'];
 $first_name=$_SESSION['first_name'];
 $last_name=$_SESSION['last_name'];
@@ -10,31 +11,48 @@ $pincode=$_SESSION['pincode'];
 $email=$_SESSION['email'];
 $phone=$_SESSION['phone'];
 $password=$_SESSION['password'];
+$sql = "SELECT profile_photo FROM user_details WHERE id = '$user_id'";
+$result = $conn->query($sql);
 
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $profilePhoto = $row['profile_photo'];
+
+    // Image path
+    $imagePath = 'uploads/' . $profilePhoto;
+}
 ?>
+
 <div class="container">
     <div class="profile">
-    <form id="profileForm" method="POST" action="update_profile.php">
+    
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
+            
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="" alt="Add image" class="rounded-circle" width="150">
+                    <img src="<?php echo $imagePath; ?>" alt="Add image" class="avatar" width="150">
                     <div class="mt-3">
-                      
-                      <input type="file" id="fileInput" style="display: none;" accept="image/*">
-                        
-                     
-                      <button type="button" id="uploadBtn"class="btn btn-primary">Add Photo</button>
+                    <form id="uploadForm" action="update_photo.php" method="POST" enctype="multipart/form-data">
+    <label for="fileInput" class="custom-file-upload">
+        
+    </label>
+    <input type="file" id="fileInput" name="image" accept="image/*" style="display: none;">
+    <button type="button" id="uploadButton" class="btn">Upload</button>
+</form>
+
+
                       
                     </div>
                   </div>
                 </div>
               </div>
+             
             </div>
             <div class="col-md-8">
               <div class="card mb-3">
+              <form id="profileForm" method="POST" action="update_profile.php">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
@@ -158,19 +176,21 @@ $(document).ready(function() {
         $("#profileForm").submit();
     });
 });
-document.getElementById("uploadBtn").addEventListener("click", function() {
-    document.getElementById("fileInput").click();
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('fileInput').addEventListener('change', function() {
+        document.getElementById('uploadForm').submit();
+    });
+
+    document.querySelector('.custom-file-upload').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('uploadButton').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
 });
 
-document.getElementById("fileInput").addEventListener("change", function() {
-    // Handle file selection here
-    var file = this.files[0];
-    if (file) {
-        // You can use this file object to preview or upload the image
-        console.log("Selected file:", file);
-        // You can submit the form or perform any other necessary action here
-    }
-});
 
 
 </script>

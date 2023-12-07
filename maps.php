@@ -89,7 +89,7 @@ if (mysqli_num_rows($result) > 0) {
             $row2 = mysqli_fetch_assoc($result2);
             $latitude = $row2['latitude'];
             $longitude = $row2['longitude'];
-
+            
 
             $destination = $latitude . ',' . $longitude;
             $map_url = 'https://www.google.com/maps/embed/v1/directions?key=*&origin=current_location&destination=' . $destination . '&zoom=15';
