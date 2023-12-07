@@ -26,7 +26,8 @@ if (mysqli_num_rows($result) > 0) {
         
         // Display the image from the 'uploads' folder using the retrieved image name
         if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
-            echo "<img src='uploads/$imageFileName' alt='Car Image'>";
+          echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
+          style='width: 100%; height: 100%; object-fit: cover;'>";
         } else {
             echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
             // If the image does not exist or the 'image_name' column is empty, display a placeholder image
@@ -76,7 +77,7 @@ if (mysqli_num_rows($result) > 0) {
   // Displaying form with "No cars found in the database" message
   echo '<form>
           <!-- Other form elements here -->
-          <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
+          <input type="text" class="add_car_indicator" value="No Cars Listed" disabled>
           <!-- Other form elements here -->
         </form>';
 }

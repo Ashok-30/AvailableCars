@@ -69,7 +69,8 @@ if (mysqli_num_rows($result) > 0) {
         
         // Display the image from the 'uploads' folder using the retrieved image name
         if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
-            echo "<img src='uploads/$imageFileName' alt='Car Image'>";
+          echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
+          style='width: 100%; height: 100%; object-fit: cover;'>";
         } else {
             echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
             // If the image does not exist or the 'image_name' column is empty, display a placeholder image
@@ -149,7 +150,8 @@ if (mysqli_num_rows($result) > 0) {
                 <h3 class="card-title">Create a profile</h3>
 
                 <p class="card-text">
-                  If you are going to use a passage of Lorem Ipsum, you need to be sure.
+                Welcome to our platform's user profile creation feature! Your profile is your gateway to 
+                personalized experiences and enhanced interactions within our community.
                 </p>
 
                 <a href="#" class="card-link">Get started</a>
@@ -167,7 +169,8 @@ if (mysqli_num_rows($result) > 0) {
                 <h3 class="card-title">Tell us what car you want to rent</h3>
 
                 <p class="card-text">
-                  Various versions have evolved over the years, sometimes by accident, sometimes on purpose
+                Experience comfort and convenience on the road! Choose from our diverse selection of quality cars 
+                for a smooth and enjoyable ride tailored to your preferences.
                 </p>
 
               </div>
@@ -183,8 +186,8 @@ if (mysqli_num_rows($result) > 0) {
                 <h3 class="card-title">Match with Owner</h3>
 
                 <p class="card-text">
-                  It to make a type specimen book. It has survived not only five centuries, but also the leap into
-                  electronic
+                Connect with car owners directly and find the perfect match for your rental needs. Enjoy a seamless
+                 process, hassle-free transactions, and personalized experiences.
                 </p>
 
               </div>
@@ -200,7 +203,8 @@ if (mysqli_num_rows($result) > 0) {
                 <h3 class="card-title">Make a deal</h3>
 
                 <p class="card-text">
-                  There are many variations of passages of Lorem available, but the majority have suffered alteration
+                Negotiate and finalize your rental terms easily. Seal the deal swiftly with our platform, ensuring 
+                fair agreements and smooth transactions for both parties involved.
                 </p>
 
               </div>
@@ -233,7 +237,7 @@ if (mysqli_num_rows($result) > 0) {
                 <figure class="card-banner">
 
                   <a href="#">
-                    <img src="./assets/images/blog-1.jpg" alt="Opening of new offices of the company" loading="lazy"
+                    <img src="img/ad-1.jpg" alt="Opening of new offices of the company" loading="lazy"
                       class="w-100">
                   </a>
 
@@ -274,7 +278,7 @@ if (mysqli_num_rows($result) > 0) {
                 <figure class="card-banner">
 
                   <a href="#">
-                    <img src="./assets/images/blog-2.jpg" alt="What cars are most vulnerable" loading="lazy"
+                    <img src="img/ad-2.jpg" alt="What cars are most vulnerable" loading="lazy"
                       class="w-100">
                   </a>
 
@@ -315,11 +319,11 @@ if (mysqli_num_rows($result) > 0) {
                 <figure class="card-banner">
 
                   <a href="#">
-                    <img src="./assets/images/blog-3.jpg" alt="Statistics showed which average age" loading="lazy"
+                    <img src="img/ad-3.jpg" alt="Statistics showed which average age" loading="lazy"
                       class="w-100">
                   </a>
 
-                  <a href="#" class="btn card-badge">Cars</a>
+                  <a href="#" class="btn card-badge">Stats</a>
 
                 </figure>
 
@@ -356,11 +360,11 @@ if (mysqli_num_rows($result) > 0) {
                 <figure class="card-banner">
 
                   <a href="#">
-                    <img src="./assets/images/blog-4.jpg" alt="What´s required when renting a car?" loading="lazy"
+                    <img src="img/ad-4.jpg" alt="What´s required when renting a car?" loading="lazy"
                       class="w-100">
                   </a>
 
-                  <a href="#" class="btn card-badge">Cars</a>
+                  <a href="#" class="btn card-badge">Rent</a>
 
                 </figure>
 
@@ -397,11 +401,11 @@ if (mysqli_num_rows($result) > 0) {
                 <figure class="card-banner">
 
                   <a href="#">
-                    <img src="./assets/images/blog-5.jpg" alt="New rules for handling our cars" loading="lazy"
+                    <img src="img/ad-5.jpg" alt="New rules for handling our cars" loading="lazy"
                       class="w-100">
                   </a>
 
-                  <a href="#" class="btn card-badge">Company</a>
+                  <a href="#" class="btn card-badge">Rules</a>
 
                 </figure>
 

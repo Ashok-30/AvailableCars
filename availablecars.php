@@ -1,9 +1,6 @@
 <?php include('templates/header.php');
 include('config/db_connect.php');
- ?>
 
-<!--    - #LISTED CAR   -->
-<?php
 
 // Fetch data from the database
 $user_id = $_SESSION['id'];
@@ -43,7 +40,8 @@ if (mysqli_num_rows($result) > 0) {
         
         // Display the image from the 'uploads' folder using the retrieved image name
         if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
-            echo "<img src='uploads/$imageFileName' alt='Car Image'>";
+          echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
+          style='width: 100%; height: 100%; object-fit: cover;'>";
         } else {
             echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
             // If the image does not exist or the 'image_name' column is empty, display a placeholder image
@@ -80,7 +78,8 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn rent-btn login-btn" data-add-id="'.$row['add_id'].'">Book</button>
+                     
+                      <button class="btn rent-btn login-btn" onclick="redirectToBooking('.$row['add_id'].')">View Location</button>
                       
                       
 
@@ -93,12 +92,22 @@ if (mysqli_num_rows($result) > 0) {
     echo '</ul></div></section>';
 } else {
   // Displaying form with "No cars found in the database" message
-  echo '<form>
-          <!-- Other form elements here -->
-          <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
-          <!-- Other form elements here -->
-        </form>';
+  echo '<div class="container" style="text-align: center;">';
+  echo '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">';
+  echo '<form>';
+  echo '<input type="text" class="add_car_indicator" value="Sorry, Currently no cars in this location" disabled>';
+  echo '</form>';
+  echo '</div>';
+  echo '</div>';
+  
 }
 }
 ?>
+<script>
+
+function redirectToBooking(addId) {
+    // Redirect to bookings.php and pass the car_id as a query parameter
+    window.location.href = 'maps.php?add_id=' + addId;
+}
+</script>
 

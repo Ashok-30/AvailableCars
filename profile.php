@@ -100,18 +100,19 @@ $password=$_SESSION['password'];
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
-                        <h6 class="mb-0">Password</h6>
-                    </div>
-                    <div class="col-sm-3 text-secondary">
-                        <input type="password" id="passwordField" name="password" value="<?php echo $password; ?>" disabled >
-                    </div>
-                    <div class=" col-sm-3">
-                        <button type="button" id="togglePassword">
-                        <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
-                        </button>
-                    </div>
-                  </div>
+    <div class="col-sm-3">
+        <h6 class="mb-0">Password</h6>
+    </div>
+    <div class="col-sm-3 text-secondary">
+        <div class="password-wrapper">
+            <input type="password" id="passwordField" name="password" value="<?php echo $password; ?>" disabled>
+            <button type="button" id="togglePassword">
+                <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
 <hr>
 
                   <div class="row">
