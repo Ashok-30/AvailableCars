@@ -196,6 +196,9 @@ input {
   margin-left: 15%!important;
 }
  /*LOGIN*/
+ .bg-image {
+   padding-top: 3%;
+ }
  .container-login{
   max-width: 400px;
   margin: 0 auto;
@@ -203,13 +206,9 @@ input {
   color: white;
   padding-top: 5%;
  } 
- body.login-page {
-  background-image: url("img/login.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+ 
 .login-header{
-  color: white;
+  color: black;
   text-align: center;
 }
 
@@ -820,4 +819,22 @@ input { width: 100%; }
 .toggle-icon {
   font-size: 85%;
   color: #916dd9 /* Adjust the font size of eye icon */
+}
+.password-wrapper {
+  position: relative;
+}
+
+#togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust as needed */
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#password {
+  padding-right: 40px; /* Space for the button */
 }

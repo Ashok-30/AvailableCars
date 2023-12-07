@@ -46,10 +46,19 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['pincode'])) {
         $errors['pincode'] = 'Pincode is required';
     } else {
-        $pincodeord = $_POST['pincode'];
-        $pincode_pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[^\da-zA-Z]).{8,}$/';
-        if (!preg_match($pincode_pattern, $password)) {
+        $pincode = $_POST['pincode'];
+        $pincode_pattern = '/^[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}$/i';
+
+        if (!preg_match($pincode_pattern, $pincode)) {
             $errors['pincode'] = 'Please enter a valid UK postcode (e.g., AB12 3CD)';
+        }
+    }
+    if (empty($_POST['confirm_password'])) {
+        $errors['confirm_password'] = 'Please confirm your password';
+    } else {
+        $confirm_password = $_POST['confirm_password'];
+        if ($password !== $confirm_password) {
+            $errors['confirm_password'] = 'Passwords do not match';
         }
     }
  if (!array_filter($errors)) {
@@ -62,6 +71,7 @@ if (isset($_POST['submit'])) {
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
+        
         $role1 = 'Car Owner';
         $role2 = 'Renter';
         // Create the SQL query
@@ -83,6 +93,8 @@ if (isset($_POST['submit'])) {
 
 
 <body class="login-page">
+    <div class="row">
+    <div class="col-lg-6">
     <div class="container-login">
         <h1 class="login-header">Sign-up</h1>
         <form action="" method="POST">
@@ -107,59 +119,90 @@ if (isset($_POST['submit'])) {
     <div class="mb-3">     
         <input type="text" class="form-control" name="pincode" placeholder="Pincode"
         value="<?php echo htmlspecialchars($_POST['pincode'] ?? ''); ?>" aria-label="Pincode"> 
-        <div class="text-white"><?php echo htmlspecialchars($errors['pincode'] ?? ''); ?></div> 
+        <div style="color: red;"><?php echo  htmlspecialchars($errors['pincode'] ?? ''); ?></div> 
     </div>
     <div class="mb-3">
         <div class="row">
         <div class="col">
             <input type="email" class="form-control" name="email" placeholder="Email"
             value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" aria-label="Email">
-            <div class="text-white"><?php echo htmlspecialchars($errors['email'] ?? ''); ?></div>
+            <div style="color: red;"><?php echo htmlspecialchars($errors['email'] ?? ''); ?></div>
 
         </div>
             <div class="col">
                <input type="tel" class="form-control" name="phone" placeholder="Phone Number"
                value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>" aria-label="Phone">
-               <div class="text-white"><?php echo htmlspecialchars($errors['phone'] ?? ''); ?></div>
+               <div style="color: red;"><?php echo htmlspecialchars($errors['phone'] ?? ''); ?></div>
             </div>
         </div>
     </div>
     <div class="mb-3">
         <div class="row">
             <div class="col password-toggle">
-                <label for="password" class="form-label"></label>
-                <input type="password" class="form-control" name="password" id="password" 
-                placeholder="Enter password"value="<?php echo htmlspecialchars($_POST['password'] ?? ''); ?>">
-                
-                <div class="text-white"><?php echo htmlspecialchars($errors['password'] ?? ''); ?></div>
-            </div>
-            <div class="col">
-                <label for="password" class="form-label"></label>
-                <input type="password" class="form-control" name="confirm_password" id="confirm_password"
-                placeholder="Re-Enter password"value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>">
-            </div>
+            <div class="row">
+    <div class="col-md-12">
+        <label for="password" class="form-label"></label>
+        <div class="password-wrapper">
+            <input type="password" class="form-control" name="password" id="password" 
+                placeholder="Enter password" value="<?php echo htmlspecialchars($_POST['password'] ?? ''); ?>">
+            <button type="button" id="togglePassword">
+                <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
+            </button>
+        </div>
+        <div style="color: red;"><?php echo htmlspecialchars($errors['password'] ?? ''); ?></div>
+    </div>
+</div>
+</div>   
+<div class="col password-toggle">
+            <div class="row">
+    <div class="col-md-12">
+        <label for="password" class="form-label"></label>
+        <div class="password-wrapper">
+            <input type="password" class="form-control" name="confirm_password" id="password" 
+                placeholder="Re-Enter password" value="<?php echo htmlspecialchars($_POST['confirm_password'] ?? ''); ?>">
+            <button type="button" id="togglePassword">
+                <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
+            </button>
+        </div>
+        <div style="color: red;"><?php echo htmlspecialchars($errors['confirm_password'] ?? ''); ?></div>
+    </div>
+</div>
+</div>
         </div>
     </div>
    
 
             <div class="d-grid">
-                <button type="submit" name="submit" class="btn"onclick="validatePasswords()">Sign-up</button>
+                <button type="submit" name="submit" class="btn">Sign-up</button>
             </div>
         </form>
-        <div class="mb-3" style="padding-left:40%;color: white;">
-            Already have an account? <a style="color: white;" href="login.php">Login</a>
+        <div class="mb-3" style="padding-left:40%;color: black;">
+            Already have an account? <a style="color: purple;" href="login.php">Login</a>
+        </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-6 bg-image">
+                <img src="img/sign-up.png" alt="login" class="img-fluid">
+            </div>
         </div>
     </div>
-    
     <script>
-function validatePasswords() {
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirm_password").value;
-
-    if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        event.preventDefault(); // Prevent form submission
-    }
-}
-
+$(document).ready(function() {
+    $("#togglePassword").click(function() {
+        var passwordField = $("#password");
+        var toggleIcon = $("#toggleIcon");
+        
+        if (passwordField.attr("type") === "password") {
+            passwordField.attr("type", "text");
+            toggleIcon.removeClass("fa-eye");
+            toggleIcon.addClass("fa-eye-slash");
+        } else {
+            passwordField.attr("type", "password");
+            toggleIcon.removeClass("fa-eye-slash");
+            toggleIcon.addClass("fa-eye");
+        }
+    });
+});
 </script>
+   

@@ -53,12 +53,14 @@ if (isset($_POST['login'])) {
 
 
 <body class="login-page">
-
+<div class="row">
+    <div class="col-lg-6">
 <div class="container-login">
+
   <h1 class="login-header">Login</h1>
   <form action="login.php" method="POST">
   <div class="mb-3">
-  <label for="userType" class="form-label"style="color: white;">Login as ?</label>
+  <label for="userType" class="form-label"style="color: black;">Login as ?</label>
         <select class="form-control" name="role"style="background-color: white; color: black;" id="userType" name="userType">
             <option value="Car Owner">Car Owner</option>
             <option value="Renter">Renter</option>
@@ -71,21 +73,36 @@ if (isset($_POST['login'])) {
       
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" id="password" placeholder="Enter password"
-      value="<?php echo htmlspecialchars($_POST['password'] ?? ''); ?>">
+    <div class="row">
+    <div class="col-md-12">
+        <label for="password" class="form-label"></label>
+        <div class="password-wrapper">
+            <input type="password" class="form-control" name="password" id="password" 
+                placeholder="Enter password" value="<?php echo htmlspecialchars($_POST['password'] ?? ''); ?>">
+            <button type="button" id="togglePassword">
+                <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
+            </button>
+        </div>
+        <div style="color: red;"><?php echo htmlspecialchars($errors['password'] ?? ''); ?></div>
+    </div>
+</div>
     </div>
     <div class="mb-3" style="padding-left:65%;">
-      <a style="color: white;"href="forgot-password.php">Forgot password?</a>
+      <a style="color: black;"href="forgot-password.php">Forgot password?</a>
     </div>
     <div class="d-grid">
       <button type="submit" name="login" class="btn">Login</button>
     </div>
     
   </form>
-<div class="mb-3" style="padding-left:40%; color: white;">
-    Don't have an account? <a style="color: white;"href="signup.php">Sign-up</a>
+<div class="mb-3" style="padding-left:40%; color: black;">
+    Don't have an account? <a style="color: purple;"href="signup.php">Sign-up</a>
   </div>
+</div>
+</div>
+<div class="col-lg-6 bg-image">
+                <img src="img/login.jpg" alt="login" class="img-fluid">
+            </div>
 </div>
 
 <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 11" id="toastContainer">
@@ -113,6 +130,22 @@ if (isset($_POST['login'])) {
       }, 3000); // 3000 milliseconds = 3 seconds
     });
   <?php } ?>
+  $(document).ready(function() {
+    $("#togglePassword").click(function() {
+        var passwordField = $("#password");
+        var toggleIcon = $("#toggleIcon");
+        
+        if (passwordField.attr("type") === "password") {
+            passwordField.attr("type", "text");
+            toggleIcon.removeClass("fa-eye");
+            toggleIcon.addClass("fa-eye-slash");
+        } else {
+            passwordField.attr("type", "password");
+            toggleIcon.removeClass("fa-eye-slash");
+            toggleIcon.addClass("fa-eye");
+        }
+    });
+});
 </script>
 
 
