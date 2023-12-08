@@ -70,7 +70,8 @@ if (isset($_POST['submit'])) {
         $pincode = mysqli_real_escape_string($conn, $_POST['pincode']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $password1 = mysqli_real_escape_string($conn, $_POST['password']);
+        $password = password_hash($password1, PASSWORD_DEFAULT);
         
         $role1 = 'Car Owner';
         $role2 = 'Renter';

@@ -5,7 +5,10 @@ include('config/db_connect.php');
 
 // Fetch data from the database
 $user_id = $_SESSION['id'];
-$sql = "SELECT * FROM add_car where user_id = '$user_id' and status = '1'";
+
+$sql = "SELECT ac.*, ad.*
+FROM add_car ac
+JOIN address ad ON ac.add_id = ad.add_id WHERE ac.user_id = $user_id AND ac.status = 1";
 $result = mysqli_query($conn, $sql);
 
 // Check if there are rows in the result set
@@ -49,6 +52,14 @@ if (mysqli_num_rows($result) > 0) {
                         <ion-icon name="flash-outline"></ion-icon>
                         <span class="card-item-text">'.$row['transmission'].'</span>
                       </li>
+                      <li class="card-list-item">
+                      <ion-icon name="flash-outline"></ion-icon>
+                      <span class="card-item-text">ADDRESS</span>
+                    </li>
+                    <li class="card-list-item">
+                      <ion-icon name="flash-outline"></ion-icon>
+                      <span class="card-item-text">'.$row['address'].'</span>
+                    </li>
                    
                       <li class="card-list-item">
                         <ion-icon name="flash-outline"></ion-icon>

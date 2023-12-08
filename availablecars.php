@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $postcode = $_POST['postcode'] ?? '';
   $startDateTime = $_POST['startdatetime'] ?? '';
   $endDateTime = $_POST['enddatetime'] ?? '';
-$sql = "SELECT add_car.*
+$sql = "SELECT add_car.*,address.address
 FROM add_car
 JOIN address ON add_car.add_id = address.add_id
 JOIN available_dates ON add_car.add_id = available_dates.add_id
@@ -64,6 +64,14 @@ if (mysqli_num_rows($result) > 0) {
                         
                         <span class="card-item-text">'.$row['transmission'].'</span>
                       </li>
+                      <li class="card-list-item">
+                        
+                      <span class="card-item-text">ADDRESS</span>
+                    </li>
+                    <li class="card-list-item">
+                      
+                      <span class="card-item-text">'.$row['address'].'</span>
+                    </li>
                      
                       <li class="card-list-item">
                        

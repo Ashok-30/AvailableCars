@@ -364,6 +364,7 @@ input { width: 100%; }
     grid-template-columns: minmax(0, 1fr);
     gap: 30px;
   }
+ 
   
   .listed-car-card {
     background: var(--gradient);
@@ -845,3 +846,37 @@ input { width: 100%; }
 #password {
   padding-right: 40px; /* Space for the button */
 }
+/*-----------------------------------*\
+  #Admin Dashboard
+\*-----------------------------------*/
+.search-form {
+  display: flex;
+  align-items: center;
+}
+.search-button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+ 
+  cursor: pointer;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  color: white;
+}
+.search-input::placeholder {
+  /* Change the placeholder color to white */
+  color: white;
+}
+.search-button{
+  color: white;
+}
+

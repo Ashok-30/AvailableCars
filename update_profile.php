@@ -14,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pincode = mysqli_real_escape_string($conn, $_POST['pincode']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    
 
     
 
     // Update user profile in the database
-    $sql = "UPDATE user_details SET first_name='$first_name', last_name='$last_name', address='$address', pincode='$pincode', email='$email', phone='$phone', password='$password' WHERE id='$user_id'";
+    $sql = "UPDATE user_details SET first_name='$first_name', last_name='$last_name', address='$address', pincode='$pincode', email='$email', phone='$phone' WHERE id='$user_id'";
 
    
 
@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['pincode'] = $row['pincode'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['phone'] = $row['phone'];
-        $_SESSION['password'] = $row['password'];
     }
         
         // Redirect to the profile page after successful update

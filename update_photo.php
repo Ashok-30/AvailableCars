@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
             if (rename($targetFilePath, $newFilePath)) {
                 $sql="UPDATE user_details SET profile_photo = '$newFileName' WHERE id = '$user_id'";
                 if ($conn->query($sql) === TRUE) {
-                    echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded as " . $newFileName;
+                    header('Location: profile.php');
                     // Perform additional operations here (if required)
                 } else {
                     echo "Error updating profile photo in the database: " . $conn->error;

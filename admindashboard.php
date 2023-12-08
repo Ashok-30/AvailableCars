@@ -1,157 +1,120 @@
 <?php
-include 'templates/header.php';
+include 'templates/adminheader.php';
 include 'config/db_connect.php';
+session_start();
 
-// Fetch user data from the database for the dropdown list
-$sql = "SELECT id, first_name FROM user_details";
-$result = $conn->query($sql);
-$userFirstName = '';
-$userLastName = '';
-$userEmail = '';
-$userAddress = '';
-$userPincode = '';
-$userPhone = '';
-
-// Generate dropdown options
-$options = '<option value="" disabled selected>Select user</option>';
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $options .= '<option value="' . $row['id'] . '">' . $row['first_name'] . '</option>';
-    }
-}
-// Check if a specific user is selected for search
-if (isset($_GET['user'])) {
-    $search = $_GET['user'];
-
-    // Perform a SELECT query based on search criteria
-    if ($search !== '') {
-        $sql2 = "SELECT * FROM user_details WHERE id = '$search'";
-        $result2 = $conn->query($sql2);
-
-        if ($result2->num_rows > 0) {
-            // Display the results in a table
-            echo '<table border="1">';
-            while ($row = $result2->fetch_assoc()) {
-                $userFirstName = $row['first_name'];
-                $userLastName = $row['last_name'];
-                $userEmail = $row['email'];
-                $userAddress = $row['address'];
-                $userPincode = $row['pincode'];
-                $userPhone = $row['phone'];
-            }
-            echo '</table>';
-        } else {
-            echo "No results found";
-        }
-    }
+// Check if the user is logged in
+if (!isset($_SESSION['logged_in'])) {
+    header('Location: login.php');
+    exit();
 }
 
+$sql = "SELECT * FROM user_details WHERE id != 56 ORDER BY id LIMIT 3";
+$sql1 = "SELECT * FROM user_details WHERE id != '56'";
+
+$result = mysqli_query($conn, $sql);
 
 
-// Initialize variables
-$role = $first_name = $last_name = $address = $pincode = $email = $phone = $password = '';
-$errors = array('first_name' => '', 'last_name' => '', 'address' => '', 'pincode' => '', 'email' => '', 'phone' => '', 'password' => '');
+// Check if there are rows in the result set
+if (mysqli_num_rows($result) > 0) {
+    echo '<section class="section listed-car rentals" id="listed-car"style="padding-top: 5%;">
+            <div class="container">
+              <div class="title-wrapper">
+                <h2 class="h2 section-title">Users</h2>
+              </div>
+              <ul class="listed-car-list">';
 
-if (isset($_POST['update'])) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $imageFileName = $row['profile_photo'];
+        echo '<li>
+                <div class="listed-car-card ">
+                  <figure>';
 
-    // Validate password
-    if (empty($_POST['password'])) {
-        $errors['password'] = 'Password is required';
-    } else {
-        $password = $_POST['password'];
-        $password_pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[^\da-zA-Z]).{8,}$/';
-        if (!preg_match($password_pattern, $password)) {
-            $errors['password'] = 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character';
-        }
-    }
-    //Validate pincode
-    if (empty($_POST['pincode'])) {
-        $errors['pincode'] = 'Pincode is required';
-    } else {
-        $pincodeord = $_POST['pincode'];
-        $pincode_pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[^\da-zA-Z]).{8,}$/';
-        if (!preg_match($pincode_pattern, $password)) {
-            $errors['pincode'] = 'Please enter a valid UK postcode (e.g., AB12 3CD)';
-        }
-    }
- if (!array_filter($errors)) {
-        // Escape user inputs and create SQL
-        
-        $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
-        $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
-        $address = mysqli_real_escape_string($conn, $_POST['address']);
-        $pincode = mysqli_real_escape_string($conn, $_POST['pincode']);
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $role1 = 'Car Owner';
-        $role2 = 'Renter';
-        // UPDATE the SQL query
-        $sql2 = "UPDATE INTO user_details (first_name, last_name, address, pincode, email, phone, password,role1, role2) 
-            VALUES ('$first_name', '$last_name', '$address', '$pincode', '$email', '$phone', '$password', '$role1', '$role2')";
-
-        // Attempt to execute the SQL query
-        if (mysqli_query($conn, $sql2)) {
-            // Success - Redirect to another page
-            header('Location: index.php');
+        // Display the image from the 'uploads' folder using the retrieved image name
+        if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
+            echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
+          style='height: 15rem;display: block;
+          margin-left: auto;
+          margin-right: auto;
+          '>";
         } else {
-            // Query error
-            echo 'query error: ' . mysqli_error($conn);
+            echo "<img class='img-fluid' style='height: 15rem;display: block;
+            margin-left: auto;
+            margin-right: auto;
+            'src='img/profile.png' alt='Placeholder Image'>";
+            // If the image does not exist or the 'image_name' column is empty, display a placeholder image
         }
+
+        echo '</figure>
+                  <div class="card-content">
+                    <div class="card-title-wrapper">
+                      <h3 class="h3 card-title">
+                        <a href="#">' . $row['first_name'] . ' ' . $row['last_name'] . '</a>
+                      </h3>
+                      <data class="year" value="' . $row['email'] . '">' . $row['email'] . '</data>
+                    </div>
+                    <ul class="card-list">
+                      <li class="card-list-item">
+                        
+                        <span class="card-item-text">PINCODE</span>
+                      </li>
+                      <li class="card-list-item">
+                       
+                        <span class="card-item-text">' . $row['pincode'] . '</span>
+                      </li>
+                     
+                      <li class="card-list-item">
+                        
+                        <span class="card-item-text">ADDRESS</span>
+                      </li>
+                      <li class="card-list-item">
+                       
+                        <span class="card-item-text">' . $row['address'] . '</span>
+                      </li>
+                      
+                      <li class="card-list-item">
+                       
+                        <span class="card-item-text">PHONE</span>
+                      </li>
+                      <li class="card-list-item">
+                      
+                        <span class="card-item-text">' . $row['phone'] . '</span>
+                      </li>
+                    </ul>
+                    <div class="card-price-wrapper">
+                      <p class="card-price">
+                       
+                      </p>
+                      <button class="btn rent-btn" data-add-id="' . $row['id'] . '">View</button>
+
+                      
+                      </div>
+                  </div>
+                </div>
+              </li>';
     }
-    $conn->close();
+
+    echo '</ul></div></section>';
+} else {
+    // Displaying form with "No cars found in the database" message
+    echo '<form>
+          <!-- Other form elements here -->
+          <input type="text" class="add_car_indicator" value="No Cars Listed" disabled>
+          <!-- Other form elements here -->
+        </form>';
 }
 ?>
 
-<!-- /*Index*/ -->
-<section class="section index" id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <form action="" class="index-form">
-                    <div class="input-wrapper">
-                        <label for="input-1" class="input-label">Search for user</label>
-                        <div>
-                            <select name="user" id="selected-user" class="input-field">
-                                <?php echo $options; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn index-btn">Search</button>
-                </form>
-            </div>
-        
-            <div>
-            <div class="row">
-            <div class="col">
-    <input type="text" class="form-control" name="first_name" value="<?php echo htmlspecialchars($userFirstName); ?>" placeholder="First name" aria-label="First name">
-</div>
-            <div class="col">
-                <input type="text" class="form-control" name="last_name"value="<?php echo htmlspecialchars($userLastName); ?>" placeholder="Last name" aria-label="Last name">
-            </div>
-        </div>
-    </div>
-    <div class="mb-3">
-        <input type="text" class="form-control" name="address" value="<?php echo htmlspecialchars($userAddress); ?>" placeholder="Address" aria-label="Address">
-    </div>
-    <div class="mb-3">     
-        <input type="text" class="form-control" name="pincode"value="<?php echo htmlspecialchars($userPincode); ?>" placeholder="Pincode" aria-label="Pincode"> 
-          
-    </div>
-    <div class="mb-3">
-        <div class="row">
-            <div class="col">
-                <input type="email" class="form-control" name="email"value="<?php echo htmlspecialchars($userEmail); ?>" placeholder="Email" aria-label="Email">
-                <div class="text-danger"><?php echo htmlspecialchars($errors['email'] ?? ''); ?></div>
-            </div>
-            <div class="col">
-               <input type="tel" class="form-control" name="phone"value="<?php echo htmlspecialchars($userPhone); ?>" placeholder="Phone Number" aria-label="Phone">
-            </div>
-        </div>
-    </div>
-    </div>
-    <button type="submit" name="update" class="btn index-btn">Update</button>
 
-        </div>
-    </div>
-</section>
+<script>
+$(document).ready(function() {
+    $('.rent-btn').on('click', function() {
+        var userId = $(this).data('add-id');
+        
+        // Redirect to profile.php with the selected user_id
+        window.location.href = 'admin_profile.php?user_id=' + userId;
+    });
+});
+   
+</script>
+

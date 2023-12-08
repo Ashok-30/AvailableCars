@@ -2,13 +2,16 @@
 session_start();
 include('config/db_connect.php');
 include('templates/header.php');
+
 if (isset($_SESSION['logged_in'])) {
-    // If already logged in, redirect to the respective dashboard
     if ($_SESSION['role'] === 'Car Owner') {
         header('Location: carownerdashboard.php');
         exit();
     } elseif ($_SESSION['role'] === 'Renter') {
         header('Location: driverdashboard.php');
+        exit();
+    } elseif ($_SESSION['role'] === 'Admin') {
+        header('Location: admindashboard.php');
         exit();
     }
 }
@@ -18,35 +21,47 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    $sql = "SELECT * FROM user_details WHERE email = ? AND password = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss', $email, $password);
+    // Check if the user is an admin
+    if ($email === '123@admin.com' && $password === '@Dmin123') {
+        $_SESSION['logged_in'] = true;
+        $_SESSION['role'] = 'Admin'; // Set the role as 'Admin'
+        header('Location: admindashboard.php');
+        exit();
+    }
 
+    // If not an admin, proceed to regular user login
+    $sql = "SELECT * FROM user_details WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $_SESSION['logged_in'] = true;
-        $_SESSION['role'] = $role;
-        $_SESSION['first_name'] = $row['first_name'];
-        $_SESSION['id'] = $row['id'];
-        $_SESSION['last_name'] = $row['last_name'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['phone'] = $row['phone'];
-        $_SESSION['address'] = $row['address'];
-        $_SESSION['pincode'] = $row['pincode'];
-        $_SESSION['password'] = $row['password'];
+        // Verify the entered password with the hashed password from the database
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['role'] = $role;
+            $_SESSION['first_name'] = $row['first_name'];
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['last_name'] = $row['last_name'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['phone'] = $row['phone'];
+            $_SESSION['address'] = $row['address'];
+            $_SESSION['pincode'] = $row['pincode'];
 
-        if ($role === 'Car Owner') {
-            header('Location: carownerdashboard.php');
-            exit();
-        } elseif ($role === 'Renter') {
-            header('Location: driverdashboard.php');
-            exit();
+            if ($role === 'Car Owner') {
+                header('Location: carownerdashboard.php');
+                exit();
+            } elseif ($role === 'Renter') {
+                header('Location: driverdashboard.php');
+                exit();
+            }
+        } else {
+            $error_msg = "Invalid email or password";
         }
     } else {
-        $error_msg = "Invalid email or password";
+        $error_msg = "No user found with that email";
     }
 }
 ?>

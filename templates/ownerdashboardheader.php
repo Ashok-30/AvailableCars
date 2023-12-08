@@ -39,9 +39,7 @@ session_start();
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link fas fa-envelope"></a>
-          </li>
+         
           
           
           <li class="nav-item dropdown">
