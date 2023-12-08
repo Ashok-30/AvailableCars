@@ -51,7 +51,7 @@ if (mysqli_num_rows($result) > 0) {
                       <h3 class="h3 card-title">
                         <a href="#">' . $row['first_name'] . ' ' . $row['last_name'] . '</a>
                       </h3>
-                      <data class="year" value="' . $row['email'] . '">' . $row['email'] . '</data>
+                     
                     </div>
                     <ul class="card-list">
                       <li class="card-list-item">
@@ -62,6 +62,14 @@ if (mysqli_num_rows($result) > 0) {
                        
                         <span class="card-item-text">' . $row['pincode'] . '</span>
                       </li>
+                      <li class="card-list-item">
+                        
+                      <span class="card-item-text">EMAIL</span>
+                    </li>
+                    <li class="card-list-item">
+                     
+                      <span class="card-item-text">' . $row['email'] . '</span>
+                    </li>
                      
                       <li class="card-list-item">
                         

@@ -47,6 +47,14 @@
                                     </div>
                                 </form>
                             </li>
+
+                            <li class="nav-item">
+                               
+                                    <a href="admindashboard.php" type="submit" name="logout" class="nav-link brand-style">
+                                        Dashboard
+                                    </a>
+                                
+                            </li>
                             <li class="nav-item">
                                 <form id="logoutForm" action="logout.php" method="POST">
                                     <button type="submit" name="logout" class="nav-link brand-style">

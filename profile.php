@@ -47,8 +47,9 @@ if ($result->num_rows > 0) {
                 <form id="uploadForm" action="update_photo.php" method="POST" enctype="multipart/form-data">
                   <label for="fileInput" class="custom-file-upload">
 
-                  </label>
+                  
                   <input type="file" id="fileInput" name="image" accept="image/*" style="display: none;">
+                  </label>
                   <button type="button" id="uploadButton" class="btn">Upload</button>
                 </form>
 
