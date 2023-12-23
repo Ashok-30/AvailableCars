@@ -74,7 +74,7 @@ $conn->close();
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzAj_p1-6mJzkQ10yEoPArYb_A9YPfh0A&libraries=places" async defer></script>
+<script src="" async defer></script>
 <script>
 function geocodeAddress() {
     var geocoder = new google.maps.Geocoder();

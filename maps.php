@@ -105,7 +105,7 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
-            $map_url = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzAj_p1-6mJzkQ10yEoPArYb_A9YPfh0A&origin=current_location&destination=' . $destination . '&zoom=15';
+            $map_url = "";
             
             echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
         } else {

@@ -96,8 +96,8 @@ if (isset($_POST['submit'])) {
 <body class="login-page">
     <div class="row">
     <div class="col-lg-6">
-    <div data-aos="zoom-in-down"data-aos-easing="linear"
-     data-aos-duration="1500">
+    <div data-aos="fade-right"data-aos-easing="linear"
+     data-aos-duration="1000">
     <div class="container-login">
         <h1 class="login-header">Sign-up</h1>
         <form action="" method="POST">
