@@ -4,8 +4,6 @@ include('templates/ownerdashboardheader.php');
 include('templates/ownersidebar.php');
 
 
-
-// Check if the user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'Car Owner') {
   header('Location: login.php');
   exit();

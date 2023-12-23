@@ -28,10 +28,18 @@ if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   $profilePhoto = $row['profile_photo'];
 
-  // Image path
+
   $imagePath = 'uploads/' . $profilePhoto;
 }
 ?>
+<style>
+
+  .editable-field {
+    border: 2px solid #916dd9d4; 
+    border-radius: 5px;
+    padding: 5px;
+  }
+</style>
 
 <div class="container">
   <div class="profile">
@@ -143,15 +151,16 @@ if ($result->num_rows > 0) {
 <script>
   $(document).ready(function() {
     $("#editProfile").click(function() {
-      // Enable all input fields for editing
+ 
       $("#profileForm input").prop("readonly", false);
       $("#passwordField").prop("disabled", false);
       $("#saveProfile").show();
       $(this).hide();
+      $("#profileForm input").addClass("editable-field");
     });
 
     $("#saveProfile").click(function() {
-      // Submit the form to update profile
+      
       $("#profileForm").submit();
     });
   });

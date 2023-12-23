@@ -880,3 +880,10 @@ input { width: 100%; }
   color: white;
 }
 
+.listed-admin-list {
+  list-style: none;
+  display: grid;
+
+  gap: 30px;
+}
+.listed-admin-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }

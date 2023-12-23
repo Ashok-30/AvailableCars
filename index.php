@@ -7,7 +7,9 @@ include('config/db_connect.php');
 
   <div class="container">
     <div class="row">
+    
       <div class="col-lg-6">
+      <div data-aos="flip-right"data-aos-duration="3000">
         <div class="index-content">
           <h2 class="h1 index-title">The easy way to Rent a Car</h2> 
           <p class="index-text">Booking a car has never been easier. Search for your desired car in desired location.</p>
@@ -17,7 +19,7 @@ include('config/db_connect.php');
           <div class="input-wrapper">
             <label for="input-1" class="input-label">POSTCODE</label>
 
-            <input type="text" name="postcode" placeholder="" id="input-1" class="input-field" value="<?php echo htmlspecialchars($_POST['postcode'] ?? ''); ?>" aria-label="Postcode">
+            <input required type="text" name="postcode" placeholder="" id="input-1" class="input-field" value="<?php echo htmlspecialchars($_POST['postcode'] ?? ''); ?>" aria-label="Postcode">
             <div class="">
               <?php echo '<span style="color: red;">' . htmlspecialchars($errors['postcode'] ?? '') . '</span>'; ?>
             </div>
@@ -25,17 +27,19 @@ include('config/db_connect.php');
           </div>
           <div class="input-wrapper">
             <label for="input-2" class="input-label">Check-in time</label>
-            <input type="datetime-local" name="startdatetime" id="input-2" class="input-field" placeholder="">
+            <input required type="datetime-local" name="startdatetime" id="input-2" class="input-field" placeholder="">
           </div>
           <div class="input-wrapper">
             <label for="input-3" class="input-label">Checkout time </label>
-            <input type="datetime-local" name="enddatetime" id="input-3" class="input-field" placeholder="">
+            <input required type="datetime-local" name="enddatetime" id="input-3" class="input-field" placeholder="">
           </div>
           <button type="submit" name="submit" class="btn index-btn">Search</button>
         </form>
 
       </div>
+      </div>
       <div class="col-lg-6">
+      <div data-aos="flip-left"data-aos-duration="3000">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="2000">
@@ -51,6 +55,7 @@ include('config/db_connect.php');
           </div>
         </div>
       </div>
+</div>
     </div>
   </div>
    
@@ -60,15 +65,12 @@ include('config/db_connect.php');
 <?php
 
 
-
-// Fetch data from the database
 $user_id = $_SESSION['id'];
 $sql = "SELECT ac.*, ad.*
 FROM add_car ac
 JOIN address ad ON ac.add_id = ad.add_id WHERE ac.status = 1";;
 $result = mysqli_query($conn, $sql);
 
-// Check if there are rows in the result set
 if (mysqli_num_rows($result) > 0) {
   echo '<section class="section listed-car rentals"style="margin-right: 2%;margin-left: 2%;" id="listed-car">
             <div class="container">
@@ -80,19 +82,20 @@ if (mysqli_num_rows($result) > 0) {
   while ($row = mysqli_fetch_assoc($result)) {
     $imageFileName = $row['image_name'];
     echo '<li>
+    
                 <div class="listed-car-card">
                   <figure class="card-banner">';
 
-    // Display the image from the 'uploads' folder using the retrieved image name
     if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
       echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
           style='width: 100%; height: 100%; object-fit: cover;'>";
     } else {
       echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
-      // If the image does not exist or the 'image_name' column is empty, display a placeholder image
+
     }
 
     echo '</figure>
+    <div data-aos="flip-down"data-aos-duration="3000">
                   <div class="card-content">
                     <div class="card-title-wrapper">
                       <h3 class="h3 card-title">
@@ -138,12 +141,13 @@ if (mysqli_num_rows($result) > 0) {
                       </div>
                   </div>
                 </div>
+                </div>
               </li>';
   }
 
   echo '</ul></div></section>';
 } else {
-  // Displaying form with "No cars found in the database" message
+
   echo '<form>
           <!-- Other form elements here -->
           <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
@@ -159,6 +163,11 @@ if (mysqli_num_rows($result) > 0) {
 
 <section class="section get-start">
   <div class="container">
+  <div data-aos="flip-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine">
+
+  <div data-aos="zoom-in"data-aos-duration="3000">
 
     <h2 class="h2 section-title">Get Set and Rent</h2>
 
@@ -235,7 +244,8 @@ if (mysqli_num_rows($result) > 0) {
       </li>
 
     </ul>
-
+    </div>
+  </div>
   </div>
 </section>
 
@@ -484,6 +494,9 @@ if (mysqli_num_rows($result) > 0) {
             return false;
         }
 
-        return true; // Submit the form if validation passes
+        return true; 
     }
+</script>
+<script>
+  AOS.init();
 </script>

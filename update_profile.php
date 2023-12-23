@@ -1,12 +1,12 @@
 <?php
-// update_profile.php
+
 
 session_start();
 include('config/db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Retrieve form data
+
     $user_id = $_SESSION['id'];
     $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
@@ -16,9 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     
 
-    
-
-    // Update user profile in the database
     $sql = "UPDATE user_details SET first_name='$first_name', last_name='$last_name', address='$address', pincode='$pincode', email='$email', phone='$phone' WHERE id='$user_id'";
 
    
@@ -36,15 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['phone'] = $row['phone'];
     }
         
-        // Redirect to the profile page after successful update
+      
         header('Location: profile.php');
         exit();
     } else {
-        // Handle update failure
+  
         echo 'Error updating profile: ' . mysqli_error($conn);
     }
 } else {
-    // Handle invalid request method
+
     echo 'Invalid request method';
 }
 ?>

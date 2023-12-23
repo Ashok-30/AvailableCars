@@ -8,9 +8,10 @@
     <title>AvailableCars</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
 
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet">
@@ -20,8 +21,9 @@
 
 </head>
 
-
 <body>
+
+
 
 
 
@@ -40,12 +42,18 @@
                         <ul class="navbar-nav">
                             <!-- Search bar -->
                             <li class="nav-item">
-                                <form action="search.php" method="GET" class="search-form">
-                                    <div class="search-bar">
-                                        <input type="text" name="query" placeholder="Search user" class="search-input">
-                                        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </form>
+                           
+    <div class="search-bar">
+        <input type="text" name="query" id="search" placeholder="Search user by Name" class="search-input">
+      
+        <button id="searchBtn" type="submit" class="search-button"><i class="fas fa-search"></i></button>
+    </div>
+ 
+    
+
+<div id="suggestion-box"></div>
+
+
                             </li>
 
                             <li class="nav-item">
@@ -76,3 +84,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="search.js"></script>
+    <script src="navigate.js"></script>
+

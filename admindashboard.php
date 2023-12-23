@@ -15,7 +15,6 @@ $sql1 = "SELECT * FROM user_details WHERE id != '56'";
 $result = mysqli_query($conn, $sql);
 
 
-// Check if there are rows in the result set
 if (mysqli_num_rows($result) > 0) {
     echo '<section class="section listed-car rentals" id="listed-car"style="padding-top: 5%;">
             <div class="container">
@@ -30,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="listed-car-card ">
                   <figure>';
 
-        // Display the image from the 'uploads' folder using the retrieved image name
+        
         if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
             echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
           style='height: 15rem;display: block;
@@ -42,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
             margin-left: auto;
             margin-right: auto;
             'src='img/profile.png' alt='Placeholder Image'>";
-            // If the image does not exist or the 'image_name' column is empty, display a placeholder image
+          
         }
 
         echo '</figure>
@@ -93,7 +92,7 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                        
                       </p>
-                      <button class="btn rent-btn" data-add-id="' . $row['id'] . '">View</button>
+                      <button class="btn view-btn" data-add-id="' . $row['id'] . '">View</button>
 
                       
                       </div>
@@ -104,7 +103,7 @@ if (mysqli_num_rows($result) > 0) {
 
     echo '</ul></div></section>';
 } else {
-    // Displaying form with "No cars found in the database" message
+
     echo '<form>
           <!-- Other form elements here -->
           <input type="text" class="add_car_indicator" value="No Cars Listed" disabled>
@@ -116,10 +115,9 @@ if (mysqli_num_rows($result) > 0) {
 
 <script>
 $(document).ready(function() {
-    $('.rent-btn').on('click', function() {
+    $('.view-btn').on('click', function() {
         var userId = $(this).data('add-id');
-        
-        // Redirect to profile.php with the selected user_id
+     
         window.location.href = 'admin_profile.php?user_id=' + userId;
     });
 });

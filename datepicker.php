@@ -18,7 +18,7 @@ if (isset($_GET['add_id'])) {
         if ($row['status'] == 1) {
             
             echo '<script>alert("Car is already rented.");</script>';
-            // Redirect to listings.php after showing the message
+           
             echo '<script>window.location.href = "listings.php";</script>';
             exit();
         }
@@ -37,11 +37,11 @@ if (isset($_GET['add_id'])) {
                 
                     <div class="input-wrapper">
                         <label for="startDateTime" class="input-label">Rent Start Time</label>
-                        <input type="datetime-local" name="startDateTime" id="startDateTime" class="input-field" placeholder="" required>
+                        <input required type="datetime-local" name="startDateTime" id="startDateTime" class="input-field" placeholder="" required>
                     </div>
                     <div class="input-wrapper">
                         <label for="endDateTime" class="input-label">End Renting Time</label>
-                        <input type="datetime-local" name="endDateTime" id="endDateTime" class="input-field" placeholder="" required>
+                        <input required type="datetime-local" name="endDateTime" id="endDateTime" class="input-field" placeholder="" required>
                     </div>
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <input type="hidden" id="add_id" name="add_id" value="<?php echo $addId; ?>">

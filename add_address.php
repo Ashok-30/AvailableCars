@@ -16,8 +16,7 @@ $result1 = $conn->query($sql1);
 
     // Fetch the result as an associative array
     $row = $result1->fetch_assoc();
-    
-    // Access the 'add_id' column and assign it to $add_id
+
     $add_id = $row['add_id'];
 
         
@@ -25,15 +24,15 @@ $result1 = $conn->query($sql1);
         $latitude = $_POST['latitude'];
         $longitude = $_POST['longitude'];
         $postcode = $_POST['postcode'];
-        // Prepare INSERT query
+       
         $sql = "INSERT INTO address (address, latitude, longitude, user_id, add_id, postcode) VALUES ('$address', '$latitude', '$longitude', '$user_id', '$add_id', '$postcode')";
 
         if (mysqli_query($conn, $sql)) {
-            // Success - Redirect to another page
+            
             header('Location: listings.php');
             exit();
         } else {
-            // Query error
+           
             echo 'Query error: ' . mysqli_error($conn);
         }
     }
@@ -51,8 +50,8 @@ $conn->close();
     <label for="address">Enter Address:</label></br>
     <textarea id="address" name="address" rows="3" cols="50"></textarea>
 
-    <input type="hidden" id="lat" name="latitude">
-<input type="hidden" id="lng" name="longitude"><br>
+    <input  type="hidden" id="lat" name="latitude">
+<input  type="hidden" id="lng" name="longitude"><br>
 <label for="postcode">Enter Postcode:</label></br>
     <textarea id="postcode" name="postcode"></textarea>
 <div style="text-align: left;">
@@ -76,7 +75,7 @@ $conn->close();
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=*&libraries=places" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzAj_p1-6mJzkQ10yEoPArYb_A9YPfh0A&libraries=places" async defer></script>
 <script>
 function geocodeAddress() {
     var geocoder = new google.maps.Geocoder();
@@ -87,11 +86,11 @@ function geocodeAddress() {
             var lat = results[0].geometry.location.lat();
             var lng = results[0].geometry.location.lng();
 
-            // Set latitude and longitude values in hidden input fields
+      
             document.getElementById('lat').value = lat;
             document.getElementById('lng').value = lng;
 
-            // Submit the form
+     
             document.querySelector('form').submit();
         } else {
             alert('Geocode was not successful for the following reason: ' + status);

@@ -1,11 +1,22 @@
-<?php include('templates/header.php');
-include('config/db_connect.php');
+<?php 
+session_start();
+$role = $_SESSION['role'] ?? '';
+
+if ($role === 'Renter') {
+  include('templates/driverdashboardheader.php');
+
+  include('config/db_connect.php');;
+} else {
+  include('templates/header.php');
+  
+  include('config/db_connect.php');
+}
 
 
-// Fetch data from the database
+
 $user_id = $_SESSION['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Retrieve the posted form data
+
   $user_id = $_SESSION['id'];
   $postcode = $_POST['postcode'] ?? '';
   $startDateTime = $_POST['startdatetime'] ?? '';
@@ -23,7 +34,7 @@ AND '$endDateTime' BETWEEN available_dates.startdatetime AND available_dates.end
 ";
 $result = mysqli_query($conn, $sql);
 
-// Check if there are rows in the result set
+
 if (mysqli_num_rows($result) > 0) {
     echo '<section class="section listed-car rentals"style="margin-right: 2%;padding-top: 3%;margin-left: 2%;" id="listed-car">
             <div class="container">
@@ -38,13 +49,13 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="listed-car-card">
                   <figure class="card-banner">';
         
-        // Display the image from the 'uploads' folder using the retrieved image name
+
         if (!empty($imageFileName) && file_exists("uploads/$imageFileName")) {
           echo "<img class='img-fluid' src='uploads/$imageFileName' alt='Car Image' 
           style='width: 100%; height: 100%; object-fit: cover;'>";
         } else {
             echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
-            // If the image does not exist or the 'image_name' column is empty, display a placeholder image
+         
         }
 
         echo '</figure>
@@ -99,7 +110,7 @@ if (mysqli_num_rows($result) > 0) {
     
     echo '</ul></div></section>';
 } else {
-  // Displaying form with "No cars found in the database" message
+ 
   echo '<div class="container" style="text-align: center;">';
   echo '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">';
   echo '<form>';
@@ -114,7 +125,7 @@ if (mysqli_num_rows($result) > 0) {
 <script>
 
 function redirectToBooking(addId) {
-    // Redirect to bookings.php and pass the car_id as a query parameter
+
     window.location.href = 'maps.php?add_id=' + addId;
 }
 </script>

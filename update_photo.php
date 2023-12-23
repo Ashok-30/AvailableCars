@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
     $targetFilePath = $targetDir . basename($_FILES["image"]["name"]);
     $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
-    // Allow certain file formats
+    
     $allowTypes = array('jpg', 'jpeg', 'png');
 
     if (in_array($fileType, $allowTypes)) {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["image"])) {
                 $sql="UPDATE user_details SET profile_photo = '$newFileName' WHERE id = '$user_id'";
                 if ($conn->query($sql) === TRUE) {
                     header('Location: profile.php');
-                    // Perform additional operations here (if required)
+                   
                 } else {
                     echo "Error updating profile photo in the database: " . $conn->error;
                 }

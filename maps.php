@@ -1,6 +1,17 @@
 <?php
-include('templates/header.php');
-include('config/db_connect.php');
+
+session_start();
+$role = $_SESSION['role'] ?? '';
+
+if ($role === 'Renter') {
+  include('templates/driverdashboardheader.php');
+
+  include('config/db_connect.php');;
+} else {
+  include('templates/header.php');
+  
+  include('config/db_connect.php');
+}
 
 $add_id = $_GET['add_id'] ?? null;
 
@@ -71,7 +82,9 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <button class="btn rent-btn" data-add-id="'.$row['add_id'].'">Book now</button>
+                      <form action="payment.php" method="POST">
+                      <button type="submit" class="btn rent-btn" data-add-id="'.$row['add_id'].'">Book now</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -92,7 +105,7 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
-            $map_url = 'https://www.google.com/maps/embed/v1/directions?key=*&origin=current_location&destination=' . $destination . '&zoom=15';
+            $map_url = 'https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzAj_p1-6mJzkQ10yEoPArYb_A9YPfh0A&origin=current_location&destination=' . $destination . '&zoom=15';
             
             echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
         } else {

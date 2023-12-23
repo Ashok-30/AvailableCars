@@ -22,7 +22,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'Renter') {
           <div class="input-wrapper">
               <label for="input-1" class="input-label">POSTCODE</label>
                   
-                <input type="text"  name="postcode" placeholder="" id="input-1" class="input-field"
+                <input required type="text"  name="postcode" placeholder="" id="input-1" class="input-field"
         value="<?php echo htmlspecialchars($_POST['postcode'] ?? ''); ?>" aria-label="Postcode"> 
         <div class="">
     <?php echo '<span style="color: red;">' . htmlspecialchars($errors['postcode'] ?? '') . '</span>'; ?>
@@ -31,11 +31,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'Renter') {
           </div>
             <div class="input-wrapper">
               <label for="input-2" class="input-label">Check-in time</label>
-                   <input type="datetime-local" name="startdatetime" id="input-2" class="input-field" placeholder="">
+                   <input required type="datetime-local" name="startdatetime" id="input-2" class="input-field" placeholder="">
             </div>
             <div class="input-wrapper">
               <label for="input-3" class="input-label">Checkout time </label>
-                    <input type="datetime-local" name="enddatetime" id="input-3" class="input-field" placeholder="">
+                    <input required type="datetime-local" name="enddatetime" id="input-3" class="input-field" placeholder="">
             </div>
               <button type="submit" name="submit" class="btn index-btn">Search</button>
             </form>

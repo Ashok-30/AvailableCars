@@ -70,6 +70,8 @@ if (isset($_POST['login'])) {
 <body class="login-page">
 <div class="row">
     <div class="col-lg-6">
+    <div data-aos="zoom-in-down"data-aos-easing="linear"
+     data-aos-duration="500">
 <div class="container-login">
 
   <h1 class="login-header">Login</h1>
@@ -83,7 +85,7 @@ if (isset($_POST['login'])) {
     </div>
     <div class="mb-3">
       <label for="email"  class="form-label">Email address</label>
-      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email"
+      <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email"
       value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
       
     </div>
@@ -92,7 +94,7 @@ if (isset($_POST['login'])) {
     <div class="col-md-12">
         <label for="password" class="form-label"></label>
         <div class="password-wrapper">
-            <input type="password" class="form-control" name="password" id="password" 
+            <input required type="password" class="form-control" name="password" id="password" 
                 placeholder="Enter password" value="<?php echo htmlspecialchars($_POST['password'] ?? ''); ?>">
             <button type="button" id="togglePassword">
                 <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
@@ -114,10 +116,14 @@ if (isset($_POST['login'])) {
     Don't have an account? <a style="color: purple;"href="signup.php">Sign-up</a>
   </div>
 </div>
+    </div>
 </div>
 <div class="col-lg-6 bg-image">
+<div data-aos="zoom-in-down"data-aos-easing="linear"
+     data-aos-duration="1500">
                 <img src="img/login.jpg" alt="login" class="img-fluid">
             </div>
+</div>
 </div>
 
 <div class="position-fixed top-50 start-50 translate-middle" style="z-index: 11" id="toastContainer">
@@ -163,7 +169,9 @@ if (isset($_POST['login'])) {
 });
 </script>
 
-
+<script>
+  AOS.init();
+</script>
 </body>
 
  

@@ -6,13 +6,12 @@ include 'templates/ownerdashboardheader.php';
 include 'templates/ownersidebar.php';
 include 'config/db_connect.php';
 
-// Initialize variables
+
 $sql1 = "SELECT DISTINCT car_make FROM car";
 $result1 = $conn->query($sql1);
 $car_make = '';
 
 
-// Generate dropdown options
 $options = '<option value="" disabled selected>Select car</option>';
 if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
@@ -25,17 +24,15 @@ $status='0';
 $make = $model = $no_of_seats = $transmission = $price = $car_number = '';
 $errors = array('make' => '', 'model' => '', 'no_of_seats' => '', 'transmission' => '', 'price' => '', 'car_number' => '');
 
-// Check if the file was uploaded without errors
 if (isset($_POST["submit"])) {
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-        // Print the information about the uploaded file for debugging
+      
         var_dump($_FILES["image"]);
 
         $targetDir = "uploads/";
         $targetFilePath = $targetDir . basename($_FILES["image"]["name"]);
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        // Allow certain file formats
         $allowTypes = array('jpg', 'jpeg', 'png');
 
         if (in_array(strtolower($fileType), $allowTypes)) {
@@ -44,8 +41,8 @@ if (isset($_POST["submit"])) {
                 $newFilePath = $targetDir . $newFileName;
                 if (rename($targetFilePath, $newFilePath)) {
                     echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded as " . $newFileName;
-                    // Now, $newFileName contains the updated file name with the user's first name
-                    var_dump($_POST); // Debugging code
+                   
+                    var_dump($_POST);
     // Validate make
     if (empty($_POST['make'])) {
         $errors['make'] = 'Make is required';
@@ -91,17 +88,16 @@ if (isset($_POST["submit"])) {
     if (array_filter($errors)) {
         
     } else {
-        // All fields are valid, proceed to insert into the database
-        echo 'All fields are valid, proceed to insert into the database';
+   
         $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name)
                 VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
 
         if (mysqli_query($conn, $sql)) {
-            // Success - Redirect to another page
+           
             header('Location: add_address.php');
             exit();
         } else {
-            // Query error
+          
             echo 'Query error: ' . mysqli_error($conn);
         }
     }
@@ -135,7 +131,7 @@ if (isset($_POST["submit"])) {
         ?> 
     </select>
 </div>
-    <!-- Select car model dropdown -->
+
 <div class="col">
     <label for="carModel" class="form-label">Car Model</label>
     <select class="form-select" name="model" id="carModel">
@@ -170,15 +166,15 @@ if (isset($_POST["submit"])) {
     </div>
     <div class="row">
             <div class="col">Price per day
-            <input type="text" class="form-control"name="price" placeholder="Price in &pound;" aria-label="price">
+            <input required type="text" class="form-control"name="price" placeholder="Price in &pound;" aria-label="price">
             </div>
             <div class="col">Car Number
-            <input type="text" class="form-control"name="car_number" placeholder="Number plate" aria-label="number">
+            <input required type="text" class="form-control"name="car_number" placeholder="Number plate" aria-label="number">
             </div>
         </div>
         <div class="mb-3">
-                    <label for="photo">Upload Photo</label>
-                    <input type="file" class="form-control" id="photo" name="image" accept="image/*">
+                    <label for="photo">Upload Photo(.jpg,.png,.jpeg)</label>
+                    <input required type="file" class="form-control"  id="photo" name="image" accept="image/*">
                 </div>
 
     <div>
@@ -188,8 +184,13 @@ if (isset($_POST["submit"])) {
  
         </div>
         <div class="col-lg-6 mt-5">
+        <div data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000">
+
   <img class="img-fluid" src="img/addcar.jpg">
   </div>
+    </div>
     </div>
 </div>
     </div>
@@ -203,7 +204,7 @@ $(document).ready(function() {
         var carMake = $(this).val();
         $.ajax({
             type: 'POST',
-            url: 'get_car_models.php', // Replace with your PHP file to fetch models
+            url: 'get_car_models.php', 
             data: { car_make: carMake },
             success: function(response) {
                 $('#carModel').html(response);
@@ -213,4 +214,6 @@ $(document).ready(function() {
 });
 </script>   
 
-   
+<script>
+  AOS.init();
+</script>

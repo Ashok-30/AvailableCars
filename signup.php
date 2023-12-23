@@ -96,6 +96,8 @@ if (isset($_POST['submit'])) {
 <body class="login-page">
     <div class="row">
     <div class="col-lg-6">
+    <div data-aos="zoom-in-down"data-aos-easing="linear"
+     data-aos-duration="1500">
     <div class="container-login">
         <h1 class="login-header">Sign-up</h1>
         <form action="" method="POST">
@@ -152,6 +154,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div style="color: red;"><?php echo htmlspecialchars($errors['password'] ?? ''); ?></div>
     </div>
+   
 </div>
 </div>   
 <div class="col password-toggle">
@@ -181,13 +184,16 @@ if (isset($_POST['submit'])) {
             Already have an account? <a style="color: purple;" href="login.php">Login</a>
         </div>
         </div>
-        
+        </div>
     </div>
     <div class="col-lg-6 bg-image">
+    <div data-aos="zoom-in-down"data-aos-easing="linear"
+     data-aos-duration="1500">
                 <img src="img/sign-up.png" alt="login" class="img-fluid">
             </div>
         </div>
     </div>
+</div>
     <script>
 $(document).ready(function() {
     $("#togglePassword").click(function() {
@@ -205,5 +211,8 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<script>
+  AOS.init();
 </script>
    
