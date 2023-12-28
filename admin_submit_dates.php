@@ -21,7 +21,7 @@ $endDateTime = date('Y-m-d H:i:s', strtotime($_POST['endDateTime']));
                 if (mysqli_query($conn, $sql_update)) {
                     echo '<script>
                     if (confirm("Car Rented Successfully! Click OK to proceed.")) {
-                        window.location.href = "rentals.php";
+                        window.location.href = "admin_profile.php?user_id='.$user_id.'";
                     }
                 </script>';
             exit();

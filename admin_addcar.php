@@ -21,16 +21,14 @@ $status='0';
 $make = $model = $no_of_seats = $transmission = $price = $car_number = '';
 $errors = array('make' => '', 'model' => '', 'no_of_seats' => '', 'transmission' => '', 'price' => '', 'car_number' => '');
 
-
 if (isset($_POST["submit"])) {
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-       
+      
         var_dump($_FILES["image"]);
 
         $targetDir = "uploads/";
         $targetFilePath = $targetDir . basename($_FILES["image"]["name"]);
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-
 
         $allowTypes = array('jpg', 'jpeg', 'png');
 
@@ -40,7 +38,7 @@ if (isset($_POST["submit"])) {
                 $newFilePath = $targetDir . $newFileName;
                 if (rename($targetFilePath, $newFilePath)) {
                     echo "The file " . basename($_FILES["image"]["name"]) . " has been uploaded as " . $newFileName;
-               
+                   
                     var_dump($_POST);
     // Validate make
     if (empty($_POST['make'])) {
@@ -78,23 +76,29 @@ if (isset($_POST["submit"])) {
     }
 
     // Validate car_number
+   
     if (empty($_POST['car_number'])) {
-        $errors['car_number'] = 'Car number is required';
+        $errors['car_number'] = 'Car Number is required';
     } else {
-        $car_number = mysqli_real_escape_string($conn, $_POST['car_number']);
+        $car_number = $_POST['car_number'];
+        $pattern = '/^(?:(?:[A-HJ-PR-Y-Z]{2}\d{2}[A-HJ-PR-Y-Z]{3})|(?:[A-HJ-PR-Y-Z]\d{1,3}[A-HJ-PR-Y-Z]{3}))$/';
+
+        if (!preg_match($pattern, $car_number)) {
+            $errors['car_number'] = 'Please enter a valid UK Car number (e.g., AB12 3CD)';
+        }
     }
 
     if (array_filter($errors)) {
         
     } else {
-
+   
         $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name)
                 VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
 
         if (mysqli_query($conn, $sql)) {
-            mysqli_close($conn);
-            echo '<script>window.location.href = "admin_address.php?user_id=' . $user_id . '";</script>';
-
+           
+      
+            echo '<script>window.location.href = "admin_address.php?user_id=' . $_GET['user_id'] . '";</script>';
             exit();
         } else {
           
@@ -166,15 +170,16 @@ if (isset($_POST["submit"])) {
     </div>
     <div class="row">
             <div class="col">Price per day
-            <input type="text" class="form-control"name="price" required placeholder="Price in &pound;" aria-label="price">
+            <input required type="text" class="form-control"name="price" placeholder="Price in &pound;" aria-label="price">
             </div>
             <div class="col">Car Number
-            <input type="text" class="form-control" required name="car_number" placeholder="Number plate" aria-label="number">
+            <input required type="text" class="form-control"name="car_number" placeholder="Number plate" aria-label="number">
+            <div style="color: red;"><?php echo  htmlspecialchars($errors['car_number'] ?? ''); ?></div> 
             </div>
         </div>
         <div class="mb-3">
-                    <label for="photo">Upload Photo(.jpeg,.png,.jpg)</label>
-                    <input type="file" class="form-control" required id="photo" name="image" accept="image/*">
+                    <label for="photo">Upload Photo(.jpg,.png,.jpeg)</label>
+                    <input required type="file" class="form-control"  id="photo" name="image" accept="image/*">
                 </div>
 
     <div>

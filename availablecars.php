@@ -21,15 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $postcode = $_POST['postcode'] ?? '';
   $startDateTime = $_POST['startdatetime'] ?? '';
   $endDateTime = $_POST['enddatetime'] ?? '';
-$sql = "SELECT add_car.*,address.address
+$sql = "SELECT add_car.*, address.address
 FROM add_car
 JOIN address ON add_car.add_id = address.add_id
 JOIN available_dates ON add_car.add_id = available_dates.add_id
+LEFT JOIN booking ON add_car.add_id = booking.add_id
 WHERE add_car.status = 1
 AND address.postcode = '$postcode'
-
+AND add_car.user_id != '$user_id'
 AND '$startDateTime' BETWEEN available_dates.startdatetime AND available_dates.enddatetime
-AND '$endDateTime' BETWEEN available_dates.startdatetime AND available_dates.enddatetime;
+AND '$endDateTime' BETWEEN available_dates.startdatetime AND available_dates.enddatetime
+AND (booking.booking_status IS NULL OR booking.booking_status != 1);
+
 
 ";
 $result = mysqli_query($conn, $sql);
@@ -125,8 +128,10 @@ if (mysqli_num_rows($result) > 0) {
 <script>
 
 function redirectToBooking(addId) {
+    var userId = <?php echo json_encode($user_id); ?>;
 
-    window.location.href = 'maps.php?add_id=' + addId;
+    window.location.href = 'maps.php?add_id=' + addId + '&user_id=' + userId;
 }
+
 </script>
 

@@ -105,7 +105,7 @@ if (isset($_POST['login'])) {
 </div>
     </div>
     <div class="mb-3" style="padding-left:65%;">
-      <a style="color: black;"href="forgot-password.php">Forgot password?</a>
+      <a style="color: black;"href="forgot_password.php">Forgot password?</a>
     </div>
     <div class="d-grid">
       <button type="submit" name="login" class="btn">Login</button>

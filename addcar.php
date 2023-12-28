@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 
 include 'templates/ownerdashboardheader.php';
 include 'templates/ownersidebar.php';
@@ -79,8 +78,9 @@ if (isset($_POST["submit"])) {
     }
 
     // Validate car_number
+ 
     if (empty($_POST['car_number'])) {
-        $errors['car_number'] = 'Car number is required';
+        $errors['car_number'] = 'Car Number is required';
     } else {
         $car_number = mysqli_real_escape_string($conn, $_POST['car_number']);
     }
@@ -97,7 +97,7 @@ if (isset($_POST["submit"])) {
             header('Location: add_address.php');
             exit();
         } else {
-          
+            // Query error
             echo 'Query error: ' . mysqli_error($conn);
         }
     }
@@ -131,7 +131,7 @@ if (isset($_POST["submit"])) {
         ?> 
     </select>
 </div>
-
+    <!-- Select car model dropdown -->
 <div class="col">
     <label for="carModel" class="form-label">Car Model</label>
     <select class="form-select" name="model" id="carModel">
@@ -170,6 +170,7 @@ if (isset($_POST["submit"])) {
             </div>
             <div class="col">Car Number
             <input required type="text" class="form-control"name="car_number" placeholder="Number plate" aria-label="number">
+
             </div>
         </div>
         <div class="mb-3">

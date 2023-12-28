@@ -31,7 +31,7 @@ if (isset($_GET['add_id'])) {
                 <div class="index-content">
                     <h2 class="h1 index-title">Enter Start Date and End Date</h2>
                 </div>
-                <form action="submit_dates.php" id="dateForm" class="index-form" method="POST" onsubmit="return validateForm()">
+                <form action="admin_submit_dates.php" id="dateForm" class="index-form" method="POST" onsubmit="return validateForm()">
                 
                     <div class="input-wrapper">
                         <label for="startDateTime" class="input-label">Rent Start Time</label>

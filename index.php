@@ -68,7 +68,13 @@ include('config/db_connect.php');
 $user_id = $_SESSION['id'];
 $sql = "SELECT ac.*, ad.*
 FROM add_car ac
-JOIN address ad ON ac.add_id = ad.add_id WHERE ac.status = 1";;
+JOIN address ad ON ac.add_id = ad.add_id
+WHERE ac.status = 1
+AND ac.add_id NOT IN (
+    SELECT DISTINCT add_id
+    FROM booking
+    WHERE add_id = ac.add_id
+)ORDER BY id LIMIT 10";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -150,7 +156,7 @@ if (mysqli_num_rows($result) > 0) {
 
   echo '<form>
           <!-- Other form elements here -->
-          <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
+          <input type="text" class="add_car_indicator" value="No cars Rented. Please come back later" disabled>
           <!-- Other form elements here -->
         </form>';
 }
@@ -289,7 +295,7 @@ if (mysqli_num_rows($result) > 0) {
               <div class="publish-date">
                 <ion-icon name="time-outline"></ion-icon>
 
-                <time datetime="2022-01-14">January 9, 2007</time>
+                <time datetime="2022-01-14">August 10, 2007</time>
               </div>
 
               <div class="comments">
@@ -449,7 +455,7 @@ if (mysqli_num_rows($result) > 0) {
               <div class="publish-date">
                 <ion-icon name="time-outline"></ion-icon>
 
-                <time datetime="2022-01-14">March 30, 2021</time>
+                <time datetime="2022-01-14">January 9, 2021</time>
               </div>
 
               <div class="comments">

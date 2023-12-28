@@ -14,6 +14,11 @@ if ($role === 'Renter') {
 }
 
 $add_id = $_GET['add_id'] ?? null;
+$user_id =$_GET['user_id'] ?? null;
+if($user_id === "null"){
+    header('Location: login.php');
+    exit;
+}
 
 $sql = "SELECT add_car.*, address.address
         FROM add_car
@@ -40,6 +45,7 @@ if (mysqli_num_rows($result) > 0) {
           style='width: 100%; height: 100%; object-fit: cover;'>";
         } else {
             echo "<img src='placeholder-image.jpg' alt='Placeholder Image'>";
+            
         }
 
         echo '</figure>
@@ -82,9 +88,10 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                         <strong>&pound;'.$row['price'].'</strong> / day
                       </p>
-                      <form action="payment.php" method="POST">
-                      <button type="submit" class="btn rent-btn" data-add-id="'.$row['add_id'].'">Book now</button>
-                      </form>
+                      <form action="payment.php?add_id='.$row['add_id'].'&user_id='.$user_id.'" method="POST">
+                      <button type="submit" class="btn rent-btn">Book now</button>
+                  </form>
+                  
                     </div>
                   </div>
                 </div>
@@ -105,7 +112,7 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
-            $map_url = "";
+            $map_url = 'https://www.google.com/maps/embed/v1/directions?key=???&origin=current_location&destination=' . $destination . '&zoom=15';
             
             echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
         } else {

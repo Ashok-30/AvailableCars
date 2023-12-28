@@ -58,8 +58,15 @@
 
                             <li class="nav-item">
                                
-                                    <a href="admindashboard.php" type="submit" name="logout" class="nav-link brand-style">
+                                    <a href="admindashboard.php"   class="nav-link brand-style">
                                         Dashboard
+                                    </a>
+                                
+                            </li>
+                            <li class="nav-item">
+                               
+                                    <a href="carmodel.php"   class="nav-link brand-style">
+                                        ADD Car Model
                                     </a>
                                 
                             </li>

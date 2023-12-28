@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_in'])) {
     exit();
 }
 
-$sql = "SELECT * FROM user_details WHERE id != 56 ORDER BY id LIMIT 3";
+$sql = "SELECT * FROM user_details WHERE id != 56 ORDER BY id LIMIT 10";
 $sql1 = "SELECT * FROM user_details WHERE id != '56'";
 
 $result = mysqli_query($conn, $sql);
