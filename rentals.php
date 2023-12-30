@@ -4,24 +4,32 @@ include('templates/ownersidebar.php');
 include('config/db_connect.php');
 
 $user_id = $_SESSION['id'];
+ // Replace 'Your_Timezone' with your desired timezone
 
-$sql = "SELECT ac.*, ad.*
+
+
+$sql = "SELECT ac.*, ad.*, adt.startdatetime, adt.enddatetime
 FROM add_car ac
 JOIN address ad ON ac.add_id = ad.add_id
+JOIN available_dates adt ON ac.add_id = adt.add_id
+
 WHERE ac.user_id = $user_id
 AND ac.status = 1
+
+
 AND ac.add_id NOT IN (
     SELECT DISTINCT add_id
     FROM booking
     WHERE add_id = ac.add_id
-)";
+)
+";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     echo '<section class="section listed-car rentals" id="listed-car">
             <div class="container">
               <div class="title-wrapper">
-                <h2 class="h2 section-title">CARS CURRENTLY RENTED</h2>
+                <h2 class="h2 section-title">CARS OPEN TO RENT</h2>
               </div>
               <ul class="listed-car-list">';
     
@@ -74,6 +82,23 @@ if (mysqli_num_rows($result) > 0) {
                         <ion-icon name="hardware-chip-outline"></ion-icon>
                         <span class="card-item-text">'.$row['car_number'].'</span>
                       </li>
+                      <li class="card-list-item">
+                      <ion-icon name="flash-outline"></ion-icon>
+                      <span class="card-item-text">Available from</span></span>
+                    </li>
+                    <li class="card-list-item">
+                      <ion-icon name="hardware-chip-outline"></ion-icon>
+                      <span class="card-item-text">'.$row['startdatetime'].'</span>
+                    </li>
+                    <li class="card-list-item">
+                    <ion-icon name="flash-outline"></ion-icon>
+                    <span class="card-item-text">Available till</span></span>
+                  </li>
+                  <li class="card-list-item">
+                    <ion-icon name="hardware-chip-outline"></ion-icon>
+                    <span class="card-item-text">'.$row['enddatetime'].'</span>
+                  </li>
+                      
                     </ul>
                     <div class="card-price-wrapper">
                       <p class="card-price">

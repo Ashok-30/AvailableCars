@@ -2,7 +2,7 @@
 include 'templates/adminheader.php';
 
 include 'config/db_connect.php';
-
+session_start();
 
 $sql1 = "SELECT DISTINCT car_make FROM car";
 $result1 = $conn->query($sql1);
@@ -80,20 +80,16 @@ if (isset($_POST["submit"])) {
     if (empty($_POST['car_number'])) {
         $errors['car_number'] = 'Car Number is required';
     } else {
-        $car_number = $_POST['car_number'];
-        $pattern = '/^(?:(?:[A-HJ-PR-Y-Z]{2}\d{2}[A-HJ-PR-Y-Z]{3})|(?:[A-HJ-PR-Y-Z]\d{1,3}[A-HJ-PR-Y-Z]{3}))$/';
-
-        if (!preg_match($pattern, $car_number)) {
-            $errors['car_number'] = 'Please enter a valid UK Car number (e.g., AB12 3CD)';
-        }
+        $car_number = mysqli_real_escape_string($conn, $_POST['car_number']);
     }
 
     if (array_filter($errors)) {
         
     } else {
-   
-        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name)
-                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
+        $currentDate = date("Y-m-d");
+        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name,date_added)
+                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName',CURDATE())";
+
 
         if (mysqli_query($conn, $sql)) {
            

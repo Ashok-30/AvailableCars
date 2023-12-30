@@ -59,7 +59,7 @@
                             <li class="nav-item">
                                
                                     <a href="admindashboard.php" type="submit" name="logout" class="nav-link brand-style">
-                                        Dashboard
+                                        Home
                                     </a>
                                 
                             </li>

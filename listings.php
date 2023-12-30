@@ -2,14 +2,20 @@
 include('templates/ownerdashboardheader.php');
 include('templates/ownersidebar.php');
 include('config/db_connect.php');
-
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'Car Owner') {
+    header('Location: login.php');
+    exit();
+  }
 
 $user_id = $_SESSION['id'];
-
 $sql = "SELECT ac.*, ad.*
 FROM add_car ac
-JOIN address ad ON ac.add_id = ad.add_id WHERE ac.user_id = $user_id";
+JOIN address ad ON ac.add_id = ad.add_id
+
+WHERE ac.user_id = $user_id";
 $result = mysqli_query($conn, $sql);
+
 
 if (mysqli_num_rows($result) > 0) {
     echo '<section class="section listed-car rentals" id="listed-car">
@@ -67,6 +73,7 @@ if (mysqli_num_rows($result) > 0) {
                         <ion-icon name="hardware-chip-outline"></ion-icon>
                         <span class="card-item-text">'.$row['car_number'].'</span>
                       </li>
+                     
                     </ul>
                     <div class="card-price-wrapper">
                       <p class="card-price">

@@ -2,8 +2,7 @@
 <?php
 include 'templates/adminheader.php';
 include 'config/db_connect.php';
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 
 
 // Initialize variables

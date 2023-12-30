@@ -8,6 +8,7 @@ $postcode = '';
 
 
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['address'], $_POST['latitude'], $_POST['longitude'], $_POST['postcode'])) {
         $sql1 = "SELECT add_id FROM add_car ORDER BY add_id DESC LIMIT 1;";
@@ -75,7 +76,7 @@ $conn->close();
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=???&libraries=places" async defer></script>
+<script src="" async defer></script>
 <script>
 function geocodeAddress() {
     var geocoder = new google.maps.Geocoder();

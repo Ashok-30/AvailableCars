@@ -76,8 +76,11 @@ if (isset($_POST['submit'])) {
         $role1 = 'Car Owner';
         $role2 = 'Renter';
         // Create the SQL query
-        $sql = "INSERT INTO user_details (first_name, last_name, address, pincode, email, phone, password,role1, role2) 
-            VALUES ('$first_name', '$last_name', '$address', '$pincode', '$email', '$phone', '$password', '$role1', '$role2')";
+        $currentDate = date("Y-m-d"); 
+
+        $sql = "INSERT INTO user_details (first_name, last_name, address, pincode, email, phone, password, role1, role2, date_added) 
+                VALUES ('$first_name', '$last_name', '$address', '$pincode', '$email', '$phone', '$password', '$role1', '$role2', CURDATE())";
+        
 
         // Attempt to execute the SQL query
         if (mysqli_query($conn, $sql)) {

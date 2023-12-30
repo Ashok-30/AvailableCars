@@ -4,8 +4,6 @@ include('templates/ownerdashboardheader.php');
 include('templates/ownersidebar.php');
 include 'config/db_connect.php';
 $user_id = $_GET['user_id'];
-$add_id = "$_GET[add_id]";
-
 
 
 $sql = "SELECT *
@@ -29,7 +27,7 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $imageFileName = $row['image_name'];
         echo '
-        <form action ="complete_ride.php?user_id='. $user_id .'" method="post">
+        <form action ="submit_rating.php?user_id=' . $user_id . '&add_id=' . $row['add_id'] . '" method="post">
         <li>
                 <div class="listed-car-card">
                   <figure class="card-banner">';
@@ -80,7 +78,7 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="card-price-wrapper">
                       <button type="submit" class="btn remove-btn" name="remove_car" 
                       data-add-id="' . $row['add_id'] . '">
-                        Remove
+                        Ride completed
                       </button>
                       <input type="hidden" name="add_id_to_remove" 
                       value="' . $row['add_id'] . '">
@@ -95,7 +93,7 @@ if (mysqli_num_rows($result) > 0) {
 
     echo '<form>
           <!-- Other form elements here -->
-          <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
+          <input type="text" class="add_car_indicator" value="No cars Booked. Please wait for bookings." disabled>
           <!-- Other form elements here -->
         </form>';
 }

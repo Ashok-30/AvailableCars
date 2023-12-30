@@ -8,14 +8,14 @@
     <title>AvailableCars</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
- 
+
 
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.0.0/dist/ionicons/ionicons.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
@@ -42,34 +42,44 @@
                         <ul class="navbar-nav">
                             <!-- Search bar -->
                             <li class="nav-item">
-                           
-    <div class="search-bar">
-        <input type="text" name="query" id="search" placeholder="Search user by Name" class="search-input">
-      
-        <button id="searchBtn" type="submit" class="search-button"><i class="fas fa-search"></i></button>
-    </div>
- 
-    
 
-<div id="suggestion-box"></div>
+                                <div class="search-bar">
+                                    <input type="text" name="query" id="search" placeholder="Search user by Name" class="search-input">
+
+                                    <button id="searchBtn" type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                                </div>
+
+
+
+                                <div id="suggestion-box"></div>
 
 
                             </li>
 
                             <li class="nav-item">
-                               
-                                    <a href="admindashboard.php"   class="nav-link brand-style">
-                                        Dashboard
-                                    </a>
-                                
+
+                                <a href="admindashboard.php" class="nav-link brand-style">
+                                    Home
+                                </a>
+
+
                             </li>
                             <li class="nav-item">
-                               
-                                    <a href="carmodel.php"   class="nav-link brand-style">
-                                        ADD Car Model
-                                    </a>
-                                
+
+<a href="stats.php" class="nav-link brand-style"> Stats</a>
+
+
+</li>
+
+                            <li class="nav-item">
+
+                                <a href="carmodel.php" class="nav-link brand-style">
+                                    ADD Car Model
+                                </a>
+
                             </li>
+
+
                             <li class="nav-item">
                                 <form id="logoutForm" action="logout.php" method="POST">
                                     <button type="submit" name="logout" class="nav-link brand-style">
@@ -77,6 +87,7 @@
                                     </button>
                                 </form>
                             </li>
+                            
 
                         </ul>
                     </nav>
@@ -96,4 +107,3 @@
 
     <script src="search.js"></script>
     <script src="navigate.js"></script>
-

@@ -3,7 +3,7 @@
 session_start();
 $role = $_SESSION['role'] ?? '';
 
-if ($role === 'Renter') {
+if (isset($_SESSION['logged_in'])) {
   include('templates/driverdashboardheader.php');
 
   include('config/db_connect.php');;
@@ -16,6 +16,7 @@ if ($role === 'Renter') {
 $add_id = $_GET['add_id'] ?? null;
 $user_id =$_GET['user_id'] ?? null;
 if($user_id === "null"){
+
     header('Location: login.php');
     exit;
 }
@@ -112,7 +113,7 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
-            $map_url = 'https://www.google.com/maps/embed/v1/directions?key=???&origin=current_location&destination=' . $destination . '&zoom=15';
+            $map_url = '' . $destination . '&zoom=15';
             
             echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
         } else {

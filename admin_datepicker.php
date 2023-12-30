@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 include('templates/adminheader.php');
 include('config/db_connect.php');
 

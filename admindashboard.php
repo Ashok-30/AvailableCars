@@ -92,7 +92,8 @@ if (mysqli_num_rows($result) > 0) {
                       <p class="card-price">
                        
                       </p>
-                      <button class="btn view-btn" data-add-id="' . $row['id'] . '">View</button>
+                      <button class="btn view-btn" data-add-id="' . $row['id'] . '">View User</button>
+                      <button class="btn remove-btn" data-add-id="' . $row['id'] . '">Remove User</button>
 
                       
                       </div>
@@ -121,6 +122,12 @@ $(document).ready(function() {
         window.location.href = 'admin_profile.php?user_id=' + userId;
     });
 });
-   
+$(document).ready(function() {
+    $('.remove-btn').on('click', function() {
+        var userId = $(this).data('add-id');
+     
+        window.location.href = 'remove_user.php?user_id=' + userId;
+    });
+});
 </script>
 

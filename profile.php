@@ -6,7 +6,6 @@ $role = $_SESSION['role'] ?? '';
 
 if ($role === 'Renter') {
   include('templates/driverdashboardheader.php');
-
   include('config/db_connect.php');;
 } else {
   include('templates/ownerdashboardheader.php');

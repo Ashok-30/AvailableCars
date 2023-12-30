@@ -5,8 +5,6 @@ use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Order;
 
-$clientId = '???';
-$clientSecret = '?????-gCDoocI9cTDffPskPWeG0JBJPEk';
 
 $apiContext = new ApiContext(
     new OAuthTokenCredential($clientId, $clientSecret)

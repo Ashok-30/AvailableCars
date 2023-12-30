@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 include 'templates/ownerdashboardheader.php';
@@ -88,9 +89,9 @@ if (isset($_POST["submit"])) {
     if (array_filter($errors)) {
         
     } else {
-   
-        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name)
-                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName')";
+        $currentDate = date("Y-m-d");
+        $sql = "INSERT INTO add_car (make, model, no_of_seats, transmission, price, car_number, user_id,status, image_name,date_added)
+                VALUES ('$make', '$model', '$no_of_seats', '$transmission', '$price', '$car_number', '$user_id', '$status', '$newFileName',CURDATE())";
 
         if (mysqli_query($conn, $sql)) {
            

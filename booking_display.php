@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $imageFileName = $row['image_name'];
         echo '
-        <form action ="finish_ride.php?user_id='. $user_id .'" method="post">
+        <form action ="rating.php?user_id=' . $user_id . '&add_id=' . $row['add_id'] . '" method="post">
         <li>
                 <div class="listed-car-card">
                   <figure class="card-banner">';
@@ -93,7 +93,7 @@ if (mysqli_num_rows($result) > 0) {
 
     echo '<form>
           <!-- Other form elements here -->
-          <input type="text" class="add_car_indicator" value="No cars Rented. Please rent from listings" disabled>
+          <input type="text" class="add_car_indicator" value="No cars booked yet.Book a car to display" disabled>
           <!-- Other form elements here -->
         </form>';
 }

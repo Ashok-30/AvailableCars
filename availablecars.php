@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 $role = $_SESSION['role'] ?? '';
 
 if ($role === 'Renter') {
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $postcode = $_POST['postcode'] ?? '';
   $startDateTime = $_POST['startdatetime'] ?? '';
   $endDateTime = $_POST['enddatetime'] ?? '';
-$sql = "SELECT add_car.*, address.address
+$sql = "SELECT add_car.*, address.address, available_dates.startdatetime, available_dates.enddatetime
 FROM add_car
 JOIN address ON add_car.add_id = address.add_id
 JOIN available_dates ON add_car.add_id = available_dates.add_id
@@ -95,6 +96,22 @@ if (mysqli_num_rows($result) > 0) {
                         
                         <span class="card-item-text">'.$row['car_number'].'</span>
                       </li>
+                      <li class="card-list-item">
+                    
+                      <span class="card-item-text">Available from</span></span>
+                    </li>
+                    <li class="card-list-item">
+                  
+                      <span class="card-item-text">'.$row['startdatetime'].'</span>
+                    </li>
+                    <li class="card-list-item">
+          
+                    <span class="card-item-text">Available till</span></span>
+                  </li>
+                  <li class="card-list-item">
+  
+                    <span class="card-item-text">'.$row['enddatetime'].'</span>
+                  </li>
                     </ul>
                     <div class="card-price-wrapper">
                       <p class="card-price">

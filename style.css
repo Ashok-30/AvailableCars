@@ -70,7 +70,7 @@ TOAST
 }
 
 .toast-header {
-  background-color: #6620f3d4;
+  background-color: #9a70eed4;
   color: white; 
 }
 
@@ -91,6 +91,7 @@ TOAST
     border: none;
     border-radius: 20px;
     margin-left: 5px;
+    
   }
   .navlist{
     padding-left: 20%;

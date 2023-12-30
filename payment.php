@@ -30,7 +30,7 @@ $_SESSION['pending_user_id'] = $user_id;
         AOS.init();
     </script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=???"></script>
+    
 
 
     <script>
