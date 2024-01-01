@@ -76,7 +76,7 @@ $conn->close();
 
 
 
-<script src="" async defer></script>
+<script src= async defer></script>
 <script>
 function geocodeAddress() {
     var geocoder = new google.maps.Geocoder();

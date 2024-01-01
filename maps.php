@@ -113,7 +113,7 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
-            $map_url = '' . $destination . '&zoom=15';
+
             
             echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
         } else {

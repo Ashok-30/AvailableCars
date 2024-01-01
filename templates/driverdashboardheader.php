@@ -67,7 +67,7 @@ $user_id = $_SESSION['id'] ?? '';
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a href="switchtoowner.php" class="dropdown-item brand-style">Switch to Owner</a></li>
-              <li><a href="#" class="dropdown-item brand-style">Help</a></li>
+          
               
               <form id="logoutForm" action="logout.php" method="POST">
     <button type="submit" name="logout" class="dropdown-item brand-style">

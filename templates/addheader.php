@@ -50,7 +50,7 @@ session_start();
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a href="switchtodriver.php" class="dropdown-item brand-style">Switch to Driver</a></li>
-              <li><a href="#" class="dropdown-item brand-style">Help</a></li>
+            
               
               
     <button type=""  class="dropdown-item brand-style">

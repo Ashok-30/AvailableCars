@@ -1,33 +1,22 @@
 <?php
-include 'templates/header.php';
+include 'templates/ownerdashboardheader.php';
+include 'templates/ownersidebar.php';
 include('config/db_connect.php');
+session_start();
+$user_id=$_SESSION['id'];
 
-$sql = "SELECT rating, feedback FROM rating";
+$sql = "SELECT rating, feedback FROM rating WHERE user_id = $user_id";
 $result = $conn->query($sql);
 
-// Array of avatar images
+
 $avatarImages = array('avatar1.jpg', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png');
 
 ?>
 
-<div class="container-dashboard py-5" style="padding: 8%;margin-top: 5%;">
-    <div class="row">
-        <div class="col-lg-12">
-            <a class="text-decoration-none" href="#">
-                <div class="card p-3 shadow text-center border-0" style="margin-right:10%">
-                    <div class="card-body">
-                        <h1> <i class="fa fa-dashboard" aria-hidden="true"></i>Hear our Happy Customers</h1>
-                        <hr />
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
 
-<section class="section blog" id="blog">
+<section class="section blog" id="blog" style="margin-left: 10%;margin-top: 5%;">
     <div class="container">
-        <h2 class="h2 section-title">Our Feedbacks</h2>
+        <h2 class="h2 section-title">Feedbacks</h2>
         <div class="blog-list-grid">
 
             <?php

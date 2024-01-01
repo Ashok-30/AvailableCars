@@ -20,7 +20,7 @@ $user_id = $_SESSION['id'] ?? '';
 
  
   <a href="profile.php">Profile</a>
-  <a href="#contact">Help</a>
+  <a href="reviews.php">Reviews</a>
 </div>
 <script>
 

@@ -30,7 +30,7 @@ $_SESSION['pending_user_id'] = $user_id;
         AOS.init();
     </script>
 
-    
+  
 
 
     <script>

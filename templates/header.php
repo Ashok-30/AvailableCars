@@ -57,9 +57,9 @@
               Learn More
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a href="#" class="dropdown-item brand-style">Car Owner Guide</a></li>
-              <li><a href="#" class="dropdown-item brand-style">Driver Guide</a></li>
-              <li><a href="contactus.php" class="dropdown-item brand-style">Contact Us</a></li>
+              <li><a href="car_owner_guide.php" class="dropdown-item brand-style">Car Owner Guide</a></li>
+              <li><a href="driver_guide.php" class="dropdown-item brand-style">Driver Guide</a></li>
+              <li><a href="contactus.php" class="dropdown-item brand-style">About Us</a></li>
             </ul>   
           </li>
         </ul>
