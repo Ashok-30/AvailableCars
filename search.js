@@ -1,15 +1,12 @@
 $(document).ready(function(){
-    
     $('#search').keyup(function(){
         var query = $(this).val();
-
-        if(query !== ''){
+            if(query !== ''){
             $.ajax({
                 url: 'search.php',
                 method: 'POST',
                 data: { query: query },
                 success: function(data){
-                    // Assuming data is newline separated suggestions
                     var suggestions = data.split('\n');
                     var suggestionList = '';
 
@@ -28,17 +25,13 @@ $(document).ready(function(){
             $('#suggestion-box').html('');
         }
     });
-
-    // Handle suggestion item click specifically
     $('#suggestion-box').on('click', '.suggestion-item', function(e) {
-        e.stopPropagation(); // Prevent click event from propagating
+        e.stopPropagation(); 
 
         var selectedSuggestion = $(this).text();
         $('#search').val(selectedSuggestion);
-        $('#suggestion-box').html(''); // Clear suggestions after selection
+        $('#suggestion-box').html(''); 
     });
-
-    // Close suggestion box when clicking outside
     $(document).on('click', function(e) {
         var container = $('#suggestion-box');
         var searchInput = $('#search');

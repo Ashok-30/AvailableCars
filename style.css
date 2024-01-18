@@ -7,13 +7,7 @@
   /**
    * colors
    */
-
- 
   --slate-blue: hsl(262, 60%, 57%);
-
-
- 
-
   /**
    * typography
    */
@@ -169,7 +163,7 @@ input {
   color: #818181;
   display: block;
 }
-
+/*Sidebar*/
 .sidebar a:hover {
   color: #916dd9d4;
 }

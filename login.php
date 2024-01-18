@@ -28,7 +28,6 @@ if (isset($_POST['login'])) {
         header('Location: admindashboard.php');
         exit();
     }
-
     // If not an admin, proceed to regular user login
     $sql = "SELECT * FROM user_details WHERE email = ?";
     $stmt = $conn->prepare($sql);

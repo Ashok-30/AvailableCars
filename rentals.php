@@ -133,13 +133,15 @@ $(document).ready(function() {
             data: { add_id: addId },
             dataType: 'json',
             success: function(response) {
-                if (response.success) {
-                    console.log('Status updated successfully');
-                    location.reload(); 
-                } else {
-                    console.log('Failed to update status');
-                }
-            },
+    console.log(response);  // Log the response to the console
+    if (response.success) {
+        console.log('Status updated successfully');
+        location.reload();
+    } else {
+        console.log('Failed to update status');
+    }
+},
+
             error: function(xhr, status, error) {
                 console.error('Error:', error);
             }

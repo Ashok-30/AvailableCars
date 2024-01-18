@@ -25,7 +25,7 @@ include 'templates/addheader.php';
 </style>
 <div class="container" style="margin-top: 20%;margin-left: 20%;margin-right: 20%;margin-bottom: 20%;">
 <form id="ratingForm" method="post" action="">
-  <label for="rating"><h2 style="font-family: 'Lucida Console', Monaco, monospace;">Submit Rating for Specific Car</h2></label></br>
+  <label for="rating"><h2 style="font-family: 'Lucida Console', Monaco, monospace;">Submit Rating for Driver</h2></label></br>
   <label for="feedback">Enter Feedback:</label></br>
     <textarea required id="feedback" name="feedback" rows="3" cols="75"></textarea>
   <div class="rating">

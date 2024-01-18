@@ -9,7 +9,7 @@ $_SESSION['pending_add_id'] = $add_id;
 $_SESSION['pending_user_id'] = $user_id;
 
 ?>
-
+<script src="paypalAPI"></script>
 
 <body class="login-page">
 
@@ -40,6 +40,7 @@ $_SESSION['pending_user_id'] = $user_id;
                 purchase_units: [{
                     amount: {
                         value: '10.00'
+                        
                     }
                 }]
             });

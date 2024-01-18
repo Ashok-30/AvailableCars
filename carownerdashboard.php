@@ -10,19 +10,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'Car Owner') {
 
 $user_id = $_SESSION['id'];
 
-// Execute a query to get the number of cars for the user
+// Query for Statistics
 $query = "SELECT COUNT(add_id) AS car_count FROM add_car WHERE user_id = $user_id";
+
 $query2 = "SELECT COUNT(add_id) AS car_count FROM add_car WHERE user_id = $user_id AND status = '1'";
+
 $query3 = "SELECT MONTH(r.date_added) AS month, COUNT(*) AS car_count
           FROM add_car ac
           LEFT JOIN rating r ON ac.add_id = r.add_id
           WHERE ac.user_id = $user_id AND YEAR(r.date_added) = 2023
           GROUP BY MONTH(r.date_added)";
+
 $query4 = "SELECT MONTH(r.date_added) AS month, COUNT(*) AS car_count
           FROM add_car ac
           LEFT JOIN rating r ON ac.add_id = r.add_id
           WHERE ac.user_id = $user_id AND YEAR(r.date_added) = 2024
           GROUP BY MONTH(r.date_added)";
+
 $query5 = "SELECT MONTH(r.date_added) AS month,COUNT(*) * '10' AS total_finance
 FROM add_car ac LEFT JOIN rating r ON ac.add_id = r.add_id WHERE ac.user_id = $user_id AND YEAR(r.date_added) = 2023
 GROUP BY MONTH(r.date_added)";

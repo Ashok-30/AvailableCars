@@ -11,8 +11,6 @@ $role = $first_name = $last_name = $address = $pincode = $email = $phone = $pass
 $errors = array('first_name' => '', 'last_name' => '', 'address' => '', 'pincode' => '', 'email' => '', 'phone' => '', 'password' => '');
 
 if (isset($_POST['submit'])) {
-
-    //Validate email
     if (empty($_POST['email'])) {
         $errors['email'] = 'Email is required';
     } else {
@@ -22,7 +20,6 @@ if (isset($_POST['submit'])) {
             $errors['email'] = 'Please enter a valid email address in the format example@email.com';
         }
     }
-    //Validate phone
     if (empty($_POST['phone'])) {
         $errors['phone'] = 'Phone number is required';
     } else {
@@ -32,7 +29,6 @@ if (isset($_POST['submit'])) {
             $errors['phone'] = 'Please enter a valid UK phone number like +44 123 456 7890';
         }
     }
-    // Validate password
     if (empty($_POST['password'])) {
         $errors['password'] = 'Password is required';
     } else {
@@ -42,7 +38,6 @@ if (isset($_POST['submit'])) {
             $errors['password'] = 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character';
         }
     }
-    //Validate pincode
     if (empty($_POST['pincode'])) {
         $errors['pincode'] = 'Pincode is required';
     } else {
@@ -62,7 +57,7 @@ if (isset($_POST['submit'])) {
         }
     }
  if (!array_filter($errors)) {
-        // Escape user inputs and create SQL
+        
         
         $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
@@ -94,7 +89,18 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+<style>
+    .password-wrapper {
+    position: relative;
+}
 
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+</style>
 
 <body class="login-page">
     <div class="row">
@@ -163,13 +169,15 @@ if (isset($_POST['submit'])) {
 <div class="col password-toggle">
             <div class="row">
     <div class="col-md-12">
-        <label for="password" class="form-label"></label>
+        <label for="confirm_password" class="form-label"></label>
         <div class="password-wrapper">
-            <input type="password" class="form-control" name="confirm_password" id="password" 
+            <input type="password" class="form-control" name="confirm_password" id="confirm_password" 
                 placeholder="Re-Enter password" value="<?php echo htmlspecialchars($_POST['confirm_password'] ?? ''); ?>">
-            <button type="button" id="togglePassword">
-                <i class="fa fa-eye toggle-icon" id="toggleIcon"></i>
-            </button>
+          <div class="password-toggle-btn">
+                    <button type="button" id="toggleConfirmPassword">
+                        <i class="fa fa-eye toggle-icon" id="toggleConfirmIcon"></i>
+                    </button>
+                </div>
         </div>
         <div style="color: red;"><?php echo htmlspecialchars($errors['confirm_password'] ?? ''); ?></div>
     </div>
@@ -200,21 +208,30 @@ if (isset($_POST['submit'])) {
     <script>
 $(document).ready(function() {
     $("#togglePassword").click(function() {
-        var passwordField = $("#password");
-        var toggleIcon = $("#toggleIcon");
-        
-        if (passwordField.attr("type") === "password") {
-            passwordField.attr("type", "text");
-            toggleIcon.removeClass("fa-eye");
-            toggleIcon.addClass("fa-eye-slash");
-        } else {
-            passwordField.attr("type", "password");
-            toggleIcon.removeClass("fa-eye-slash");
-            toggleIcon.addClass("fa-eye");
-        }
+        togglePasswordVisibility("#password", "#toggleIcon");
     });
+
+    $("#toggleConfirmPassword").click(function() {
+        togglePasswordVisibility("#confirm_password", "#toggleConfirmIcon");
+    });
+
+    function togglePasswordVisibility(passwordField, toggleIcon) {
+        var field = $(passwordField);
+        var icon = $(toggleIcon);
+
+        if (field.attr("type") === "password") {
+            field.attr("type", "text");
+            icon.removeClass("fa-eye");
+            icon.addClass("fa-eye-slash");
+        } else {
+            field.attr("type", "password");
+            icon.removeClass("fa-eye-slash");
+            icon.addClass("fa-eye");
+        }
+    }
 });
 </script>
+
 <script>
   AOS.init();
 </script>

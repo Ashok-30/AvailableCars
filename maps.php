@@ -113,9 +113,12 @@ if (mysqli_num_rows($result) > 0) {
             
 
             $destination = $latitude . ',' . $longitude;
+            $api_key = 'geocoding_api'; 
 
+            $map_url = "https://www.google.com/maps/embed/v1/place?key=$api_key&q=$destination";
             
-            echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0" style="border:0" allowfullscreen></iframe>';
+            echo '<iframe src="' . $map_url . '" width="600" height="700" frameborder="0"
+            style="border:0" allowfullscreen></iframe>';
         } else {
             echo 'No location found for this car.';
         }

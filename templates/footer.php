@@ -54,7 +54,7 @@
           </li>
 
           <li>
-            <a href="#" class="footer-link">Privacy policy</a>
+            <a href="privacy.php" class="footer-link">Privacy policy</a>
           </li>
 
           <li>

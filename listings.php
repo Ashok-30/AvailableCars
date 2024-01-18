@@ -110,7 +110,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('.remove-btn').on('click', function() {
         var addId = $(this).data('add-id');
-        
+          console.log(addId, 'remove');
         $.ajax({
             type: 'POST',
             url: 'remove_car.php', 
@@ -119,7 +119,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     console.log('Status updated successfully');
-                    location.reload(); // Reload the page after successful update
+                    location.reload(); 
                 } else {
                     console.log('Failed to update status');
                 }
